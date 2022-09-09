@@ -1,0 +1,58 @@
+{
+  "data": 
+    [
+        {
+            "lectureId": "1",
+            "imageFile": "/images/basic.jpg",
+            "title": "제목",
+            "decription": "내용",
+            "lecturer":"김영한",
+            "price":"₩34,000",
+            "star":"5",
+            "reviewCnt": "2개"
+        },
+        {
+            "lectureId": "2",
+            "imageFile": "/images/basic.jpg",
+            "title": "제목",
+            "decription": "내용",
+            "lecturer":"홍길동",
+            "price":"₩70,000",
+            "star":"5",
+            "reviewCnt": "7개"
+        },
+        {
+            "lectureId": "3",
+            "imageFile": "/images/basic.jpg",
+            "title": "제목",
+            "decription": "내용",
+            "lecturer":"이민영",
+            "price":"₩15,000",
+            "star":"5",
+            "reviewCnt": "8개"
+        },{
+            "lectureId": "4",
+            "imageFile": "/images/basic.jpg",
+            "title": "제목",
+            "decription": "내용",
+            "lecturer":"이범규",
+            "price":"₩28,000",
+            "star":"5",
+            "reviewCnt": "58개"
+        },
+        {
+            "lectureId": "5",
+            "imageFile": "/images/basic.jpg",
+            "title": "제목",
+            "decription": "내용",
+            "lecturer":"이동욱",
+            "price":"₩19,000",
+            "star":"5",
+            "reviewCnt": "3개"
+        }
+    ]
+}
+
+
+
+
