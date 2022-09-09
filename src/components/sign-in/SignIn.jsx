@@ -105,3 +105,4 @@ const SingUpButton = styled.span`
   border-bottom: 1px solid #858a8d;
   cursor: pointer;
 `;
+
