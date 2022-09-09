@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../src_assets/logo1.png";
 import { GrClose } from "react-icons/gr";
-import ModalBackground from "./ModalBackground";
+import ModalBackground from "../modal/ModalBackground";
 
 const SignIn = () => {
   return (
@@ -105,4 +105,3 @@ const SingUpButton = styled.span`
   border-bottom: 1px solid #858a8d;
   cursor: pointer;
 `;
-
