@@ -5,7 +5,7 @@ const Header = () =>{
 
     return(
         <HeaderLayout>
-            <img style={{marginLeft:"55px",cursor:"pointer"}} src="img/infLogo.png"/>
+            <img style={{marginLeft:"55px",cursor:"pointer",width:"140px",height:"60px"}} src="img/infLogo.png"/>
             <Button>
                 <LoginButton>로그인</LoginButton>
             <SignUpButton>회원가입</SignUpButton>
@@ -19,6 +19,7 @@ const Header = () =>{
 export default Header;
 
 const HeaderLayout = styled.div`
+max-width:1200px;
 min-width:769px;
 width:100vw;
 height:64px;

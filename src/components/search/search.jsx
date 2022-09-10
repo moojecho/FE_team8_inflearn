@@ -7,13 +7,12 @@ const Search = () => {
     <InputLayout>
       <InputTitle>성장기회의 평등을 추구합니다.</InputTitle>
       <DivSearch
-        contentEditable="true"
+       suppressContentEditableWarning={true}
         style={{padding: "12px" }}
       >
         <InputSearch/>
         <SearchOutlined
           style={{
-            marginLeft: "",
             fontSize: "25px",
             opacity: "0.6",
             cursor: "pointer",
@@ -32,6 +31,7 @@ const Search = () => {
 export default Search;
 
 const InputLayout = styled.div`
+  max-width:1200px;
   min-width: 769px;
   width: 100vw;
   height: 200px;
