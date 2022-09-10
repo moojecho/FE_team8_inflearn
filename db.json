@@ -1,0 +1,14 @@
+{
+  "signup": [
+    {
+      "email": "asd@dfk.com",
+      "password": "asdf1234",
+      "id": 1
+    },
+    {
+      "email": "asdf@ekr.com",
+      "password": "asdfwe123",
+      "id": 2
+    }
+  ]
+}
