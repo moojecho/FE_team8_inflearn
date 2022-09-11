@@ -9,12 +9,17 @@ import { setCookie } from "../../shared/cookie";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../../redux/modules/user";
 
-const SignIn = () => {
+const SignIn = ({ handleLoginScreen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [pwToggle, setPwToggle] = useState(false);
+
+  const moveToSignUpPage = () => {
+    handleLoginScreen();
+    navigate("/signup");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,9 +64,9 @@ const SignIn = () => {
 
   return (
     <>
-      <ModalBackground />
+      <ModalBackground handleLoginScreen={handleLoginScreen} />
       <Section>
-        <CloseButton type="button">
+        <CloseButton type="button" onClick={handleLoginScreen}>
           <GrClose />
         </CloseButton>
         <Logo src="img/logo1.png" />
@@ -98,9 +103,7 @@ const SignIn = () => {
           </SignInInputBox>
           <SignInButton>로그인</SignInButton>
         </form>
-        <SingUpButton type="button" onClick={() => navigate("/signup")}>
-          회원가입
-        </SingUpButton>
+        <SingUpButton onClick={moveToSignUpPage}>회원가입</SingUpButton>
       </Section>
     </>
   );
@@ -129,6 +132,7 @@ const Section = styled.section`
 const CloseButton = styled.span`
   width: 312px;
   text-align: end;
+  cursor: pointer;
 `;
 
 const Logo = styled.img`
