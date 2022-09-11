@@ -90,7 +90,7 @@ const SignUp = () => {
   };
 
   // 회원가입 제출
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     handleErrorMessage();
 
@@ -100,14 +100,14 @@ const SignUp = () => {
         password: pw,
       })
       .then((response) => {
-        if (response.success) {
-          alert(response.data);
+        if (response.data.success) {
+          alert(response.data.data);
         } else {
           setModal(true);
           setErrMsg("이미 가입된 이메일 주소입니다.");
         }
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => alert(error.response.data.error.message));
   };
 
   return (

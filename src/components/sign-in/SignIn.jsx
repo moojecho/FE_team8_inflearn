@@ -1,26 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../../src_assets/logo1.png";
 import { GrClose } from "react-icons/gr";
 import ModalBackground from "../modal/ModalBackground";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import axios from "axios";
+import { useDispatch } from "react-redux/es/exports";
+import { setCookie } from "../../shared/cookie";
+import { useNavigate } from "react-router-dom";
+import { setUser } from "../../redux/modules/user";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+  const [pwToggle, setPwToggle] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (email === "" || pw === "") {
+      alert("이메일 또는 비밀번호를 확인해주세요.");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/login",
+        {
+          email,
+          password: pw,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (!response.data.success) {
+        alert(response.data.data);
+      } else {
+        dispatch(setUser(response.data.data));
+        const accessToken = response.headers.get("Authorization");
+        const refreshToken = response.headers.get("Refresh-Token");
+        setCookie("accessToken", `${accessToken}`, {
+          path: "/",
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          httpOnly: true,
+          sameSite: "strict",
+        });
+        setCookie("refreshToken", `${refreshToken}`, {
+          path: "/",
+          httpOnly: true,
+          sameSite: "strict",
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      alert(error.response.data.error.message);
+    }
+  };
+
   return (
     <>
       <ModalBackground />
       <Section>
-        <CloseButton>
+        <CloseButton type="button">
           <GrClose />
         </CloseButton>
-        <Logo src={logo} />
-        <form>
+        <Logo src="img/logo1.png" />
+        <form onSubmit={handleSubmit}>
           <SignInInputBox>
-            <SignInInput type="text" id="email" placeholder="이메일" />
-            <SignInInput type="password" id="password" placeholder="비밀번호" />
+            <SignInInput
+              type="text"
+              id="email"
+              placeholder="이메일"
+              autoComplete="off"
+              letterSpacing={"-.3px"}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </SignInInputBox>
+          <SignInInputBox>
+            <SignInInput
+              type={pwToggle ? "text" : "password"}
+              id="password"
+              placeholder="비밀번호"
+              letterSpacing={pwToggle ? "-.3px" : "2px"}
+              onChange={(e) => setPw(e.target.value)}
+              value={pw}
+            />
+            <Toggle onClick={() => setPwToggle(!pwToggle)}>
+              {pwToggle ? (
+                <AiOutlineEyeInvisible
+                  style={{ width: "20px", height: "20px" }}
+                />
+              ) : (
+                <AiOutlineEye style={{ width: "20px", height: "20px" }} />
+              )}
+            </Toggle>
           </SignInInputBox>
           <SignInButton>로그인</SignInButton>
         </form>
-        <SingUpButton>회원가입</SingUpButton>
+        <SingUpButton type="button" onClick={() => navigate("/signup")}>
+          회원가입
+        </SingUpButton>
       </Section>
     </>
   );
@@ -54,24 +134,35 @@ const CloseButton = styled.span`
 const Logo = styled.img`
   width: 135;
   height: 24px;
+  margin-bottom: 16px;
 `;
 const SignInInputBox = styled.div`
+  width: 320px;
+  height: 48px;
+  padding: 13px 12px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  &:focus-within {
+    border: 1px solid#00c471;
+  }
 `;
 
 const SignInInput = styled.input`
-  width: 312px;
-  height: 48px;
-  border-radius: 4px;
-  border: 1px solid #dee2e6;
-  padding: 13px 12px;
-  margin-top: 16px;
-  letter-spacing: -0.3px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  letter-spacing: ${(props) => props.letterSpacing};
 
   &:focus {
-    outline: 1px solid#00c471;
+    outline: none;
   }
   &::placeholder {
     color: #dee2e6;
@@ -82,7 +173,7 @@ const SignInInput = styled.input`
 `;
 
 const SignInButton = styled.button`
-  width: 312px;
+  width: 320px;
   height: 48px;
   margin-top: 16px;
   background-color: #00c471;
@@ -103,5 +194,11 @@ const SingUpButton = styled.span`
   letter-spacing: -1px;
   margin-top: 8px;
   border-bottom: 1px solid #858a8d;
+  cursor: pointer;
+`;
+
+const Toggle = styled.span`
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 `;
