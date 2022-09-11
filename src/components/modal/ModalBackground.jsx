@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const ModalBackground = () => {
-  return <Background></Background>;
+const ModalBackground = ({ handleLoginScreen }) => {
+  return <Background onClick={handleLoginScreen}></Background>;
 };
 
 export default ModalBackground;

@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import SignIn from "./components/sign-in/SignIn";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
-
 
 function App() {
   return (
@@ -11,7 +9,6 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<SignIn />} />
       </Routes>
     </DivApp>
   );

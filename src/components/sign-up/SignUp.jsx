@@ -281,10 +281,13 @@ const ModalCloseButton = styled.button`
 `;
 
 const Section = styled.section`
+  width: 320px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 `;
 
 const SignUpTitle = styled.h2`
