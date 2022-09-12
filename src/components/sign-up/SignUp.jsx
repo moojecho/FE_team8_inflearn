@@ -95,13 +95,14 @@ const SignUp = () => {
     handleErrorMessage();
 
     axios
-      .post(`${process.env.REACT_APP_URL}/signup`, {
+      .post(`${process.env.REACT_APP_URL}/api/member/signup`, {
         email,
         password: pw,
       })
       .then((response) => {
         if (response.data.success) {
           alert(response.data.data);
+          document.location.href = "/";
         } else {
           setModal(true);
           setErrMsg("이미 가입된 이메일 주소입니다.");

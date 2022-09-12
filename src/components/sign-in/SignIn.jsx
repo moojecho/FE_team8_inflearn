@@ -29,7 +29,7 @@ const SignIn = ({ handleLoginScreen }) => {
     }
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_URL}/login`,
+        `${process.env.REACT_APP_URL}/api/member/login`,
         {
           email,
           password: pw,
@@ -39,26 +39,23 @@ const SignIn = ({ handleLoginScreen }) => {
         }
       );
       if (!response.data.success) {
-        alert(response.data.data);
+        alert(response.data.error.message);
       } else {
-        dispatch(setUser(response.data.data));
-        const accessToken = response.headers.get("Authorization");
-        const refreshToken = response.headers.get("Refresh-Token");
-        setCookie("accessToken", `${accessToken}`, {
+        dispatch(setUser(response.data.data.nickname));
+        const accessToken = response.headers["authorization"].split(" ")[1];
+        const refreshToken = response.headers["refresh-token"];
+        setCookie("accessToken", accessToken, {
           path: "/",
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          httpOnly: true,
-          sameSite: "strict",
         });
-        setCookie("refreshToken", `${refreshToken}`, {
+        setCookie("refreshToken", refreshToken, {
           path: "/",
-          httpOnly: true,
-          sameSite: "strict",
         });
         navigate("/");
+        handleLoginScreen();
       }
     } catch (error) {
-      alert(error.response.data.error.message);
+      alert(error.message);
     }
   };
 
