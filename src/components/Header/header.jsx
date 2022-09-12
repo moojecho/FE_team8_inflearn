@@ -1,17 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "../sign-in/SignIn";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { getCookie, deleteCookie } from "../../shared/cookie";
+import { setUser } from "../../redux/modules/user";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
+  const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const username = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    if (getCookie("accessToken") || getCookie("refreshToken")) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [username]);
+
   const handleLoginScreen = () => {
-    setToggle(false);
+    setLogin(false);
+  };
+
+  const handleLogout = () => {
+    setIsLogin(false);
+    dispatch(setUser(""));
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
   };
   return (
     <>
-      {toggle ? <SignIn handleLoginScreen={handleLoginScreen} /> : null}
+      {login ? <SignIn handleLoginScreen={handleLoginScreen} /> : null}
       <HeaderLayout>
         <img
           style={{ marginLeft: "55px", cursor: "pointer" }}
@@ -20,10 +43,21 @@ const Header = () => {
           onClick={() => navigate("/")}
         />
         <Button>
-          <LoginButton onClick={() => setToggle(true)}>로그인</LoginButton>
-          <SignUpButton onClick={() => navigate("/signup")}>
-            회원가입
-          </SignUpButton>
+          {isLogin ? (
+            <>
+              <Greetings>{username}님</Greetings>
+              <SignUpLogoutButton onClick={handleLogout}>
+                로그아웃
+              </SignUpLogoutButton>
+            </>
+          ) : (
+            <>
+              <LoginButton onClick={() => setLogin(true)}>로그인</LoginButton>
+              <SignUpLogoutButton onClick={() => navigate("/signup")}>
+                회원가입
+              </SignUpLogoutButton>
+            </>
+          )}
         </Button>
       </HeaderLayout>
     </>
@@ -58,7 +92,7 @@ border-radius:4px;
 cursor: pointer;
 `;
 
-const SignUpButton = styled.div`
+const SignUpLogoutButton = styled.div`
   height: 35px;
   padding: 6px;
   border: 1px solid #dbdbdb;
@@ -70,4 +104,10 @@ const SignUpButton = styled.div`
   &:hover {
     background-color: #ff6954;
   }
+`;
+
+const Greetings = styled.span`
+  font-family: "Noto Sans KR", sans-serif;
+  margin-right: 10px;
+  font-size: 16px;
 `;
