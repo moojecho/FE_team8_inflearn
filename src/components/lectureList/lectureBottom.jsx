@@ -7,16 +7,14 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styled from "styled-components";
 
-const Tab = () => {
+const LectureBottom = () => {
   const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       await instance
         .get(`/api/lecture`)
-        .then((res) =>
-          setLectureData(res.data.filter((list) => list.backLevel == "입문"))
-        );
+        .then((res) => setLectureData(res.data.filter((list)=>list.backLevel=="중급이상")));
     };
 
     getData();
@@ -25,8 +23,8 @@ const Tab = () => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: lectureData.length,
+    slidesToScroll: lectureData.length,
     autoplay: false,
     autoplaySpeed: 2000,
     pauseOnHover: true,
@@ -38,30 +36,11 @@ const Tab = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <LectureCard>
-            <LectureImg key={list.lectureId} src={list.frontLectureImg} />
-            <LectureTitle>{list.frontLectureTitle}</LectureTitle>
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#808080",
-                marginTop: "30px",
-                marginLeft: "2px",
-              }}
-            >
-              {list.frontInstructor}
-            </p>
-            <p style={{ marginLeft: "3px" }}>{list.star}</p>
-            <p
-              style={{
-                fontSize: "18px",
-                fontWeight: "bold",
-                color: "#2565AE",
-                marginLeft: "2px",
-              }}
-            >
-              {list.frontOriginPrice}
-            </p>
+          <LectureCard key={list.lectureId}>
+            <LectureImg 
+              src={list.frontLectureImg}
+            ></LectureImg>
+            <LectureTitle >{list.frontLectureTitle}</LectureTitle>
           </LectureCard>
         ))}
       </Slider>
@@ -69,7 +48,7 @@ const Tab = () => {
   );
 };
 
-export default Tab;
+
 
 const Pre = styled.div`
   width: 30px;
@@ -94,49 +73,40 @@ const DivTab = styled.div`
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
     color: gray; // 버튼 색은 검은색으로
-    font-size: 50px;
+   font-size:50px;
   }
   .slick-next:before {
     opacity: 1;
     color: gray;
-    font-size: 50px;
+    font-size:50px;
   }
+  
 `;
 
 const LectureCard = styled.div`
-width:250px;
-  height: 300px;
-  display:flex;
-  justify-content:center;
-
+  height: 285px;
   &:hover{
-    width:250px;
-    display: none;
-    position: absolute;
-    top: 0;
-    height: 300px;
-    background-color: rgba(0,0,0,.8);
-    color: #fff;
-    font-size: 13px;
-    padding: 8px;
+    background-color:black;
   }
 `;
 
 const LectureImg = styled.img`
-  width: 240px;
+  width: 300px;
   height: 157px;
   margin:auto;
-  z-index:2;
+  display:flex;
+  justify-content:center;
 `;
 
 const LectureTitle = styled.p`
-  height: 45px;
+width:250px;
+margin:auto;
+height: 45px;
   font-size: 15px;
   font-weight: bold;
-  color: #454545;
   margin-top: 10px;
-  white-space: no-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
 `;
+
+export default LectureBottom;

@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import lecture from "./redux/modules/lectureSlice";
+import lecture from "./modules/lectureSlice";
 import thunk from "redux-thunk";
-import user from "./redux/modules/user";
+import user from "./modules/user";
 
 const middlewares = [thunk];
 

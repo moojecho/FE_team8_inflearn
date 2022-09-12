@@ -7,15 +7,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styled from "styled-components";
 
-const Tab = () => {
+const LectureMiddle = () => {
   const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       await instance
-        .get(`/api/lecture`)
+        .get(`api/lecture`)
         .then((res) =>
-          setLectureData(res.data.filter((list) => list.backLevel == "입문"))
+          setLectureData(res.data.filter((list) => list.backLevel == "초급"))
         );
     };
 
@@ -69,8 +69,6 @@ const Tab = () => {
   );
 };
 
-export default Tab;
-
 const Pre = styled.div`
   width: 30px;
   height: 30px;
@@ -104,39 +102,24 @@ const DivTab = styled.div`
 `;
 
 const LectureCard = styled.div`
-width:250px;
-  height: 300px;
-  display:flex;
-  justify-content:center;
-
-  &:hover{
-    width:250px;
-    display: none;
-    position: absolute;
-    top: 0;
-    height: 300px;
-    background-color: rgba(0,0,0,.8);
-    color: #fff;
-    font-size: 13px;
-    padding: 8px;
-  }
+  height: 285px;
+  margin: auto;
 `;
 
 const LectureImg = styled.img`
-  width: 240px;
+  width: 232px;
   height: 157px;
-  margin:auto;
-  z-index:2;
 `;
 
 const LectureTitle = styled.p`
-  height: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #454545;
-  margin-top: 10px;
-  white-space: no-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  
+height: 45px;
+font-size: 15px;
+font-weight: bold;
+color: #454545;
+margin-top: 10px;
+white-space: no-wrap;
+overflow: hidden;
+text-overflow: ellipsis;
 `;
+
+export default LectureMiddle;
