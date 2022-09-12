@@ -19,7 +19,7 @@ export const __getLectureList = createAsyncThunk(
     "GET_LECTURE_LIST",
     async (payload, thunkAPI) => {
       const { data } = await axios.get(
-        `http://localhost:3001/data`
+        `http://3.36.73.181:8080/api/lecture`
       );
       console.log(data)
       return thunkAPI.fulfillWithValue(data);

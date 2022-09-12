@@ -7,10 +7,10 @@ const Search = () => {
     <InputLayout>
       <InputTitle>성장기회의 평등을 추구합니다.</InputTitle>
       <DivSearch
-       suppressContentEditableWarning={true}
-        style={{padding: "12px" }}
+        suppressContentEditableWarning={true}
+        style={{ padding: "12px" }}
       >
-        <InputSearch/>
+        <InputSearch />
         <SearchOutlined
           style={{
             fontSize: "25px",
@@ -20,9 +20,13 @@ const Search = () => {
         />
       </DivSearch>
       <UnderSearch>
+        <Skils>#MVC</Skils>
         <Skils>#React</Skils>
-        <Skils>#Python</Skils>
         <Skils>#Spring Boot</Skils>
+        <Skils>#JAVA</Skils>
+        <Skils>#Python</Skils>
+        <Skils>#JPA</Skils>
+        <Skils>#Java Script</Skils>
       </UnderSearch>
     </InputLayout>
   );
@@ -31,13 +35,13 @@ const Search = () => {
 export default Search;
 
 const InputLayout = styled.div`
-  max-width:1200px;
+  max-width: 1200px;
   min-width: 769px;
   width: 100vw;
   height: 200px;
   display: flex;
   justify-content: center;
-  border:none;
+  border: none;
   flex-direction: column;
 `;
 
@@ -45,6 +49,7 @@ const InputTitle = styled.p`
   margin: auto;
   font-size: 22px;
   margin-bottom: 7px;
+  color:#363636;
 `;
 
 const DivSearch = styled.div`
@@ -86,10 +91,15 @@ const UnderSearch = styled.div`
 `;
 
 const Skils = styled.div`
-  height: 35px;
   background-color: #f1f3f5;
-  padding: 8px;
-  margin-left: 15px;
-  border: none;
-  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  letter-spacing: -.3px;
+  font-size: 12px;
+  margin: 4px;
+  padding: 0 12px;
+  height: 28px;
+  color: #3e4042;
+  border-radius: 20px;
 `;

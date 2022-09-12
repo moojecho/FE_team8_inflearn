@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import instance from "../../shared/api";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -14,9 +14,11 @@ const Tab = () => {
 
   useEffect(() => {
     const getData = async () => {
-      await axios
-        .get(`http://localhost:3001/data`)
-        .then((res) => setEventData(res.data));
+      await instance
+        .get(`/api/lecture`)
+        .then((res) =>
+          setEventData(res.data.filter((list) => list.backLevel == "입문"))
+        );
     };
 
     getData();
@@ -24,98 +26,67 @@ const Tab = () => {
 
   console.log(eventData);
   const settings = {
-    customPaging: function (index) {
-
-      return (
-        <a>
-          <DotDesign>{`sdf`}</DotDesign>
-        </a>
-      );
-    },
+    // customPaging: function (index) {
+    //   return (
+    //     <a>
+    //       <DotDesign>{`sdf`}</DotDesign>
+    //     </a>
+    //   );
+    // },
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: Pause,
     autoplaySpeed: 2000,
     pauseOnHover: true,
-    nextArrow: <NextTo></NextTo>,
-    prevArrow: <Pre></Pre>,
+    // nextArrow: <NextTo></NextTo>,
+    // prevArrow: <Pre></Pre>,
   };
 
   return (
     <DivTab>
       <Slider {...settings}>
-        <div style={{ width: "100vw", height: "320px", backgroundColor: "pink"}}>
-          <h3
-            style={{ width: "100vw", height: "320px", backgroundColor: "pink" }}
-          >
-            2
-          </h3>
-        </div>
-        <div>
-          <h3
-            style={{
-              width: "100vw",
-              height: "320px",
-              backgroundColor: "green",
-            }}
-          >
-            3
-          </h3>
-        </div>
-        <div>
-          <h3
-            style={{ width: "100vw", height: "320px", backgroundColor: "gray" }}
-          >
-            6
-          </h3>
-        </div>
         {eventData.map((list) => (
-          <div
-            style={{ width: "100vw", height: "320px", backgroundColor: "black" }}
-            key={list.lectureId}
-          >
-            <div
+          <div>
+            <img
+              key={list.lectureId}
               style={{
                 width: "100vw",
                 height: "320px",
-                backgroundColor: "black",
+                cursor: "pointer",
               }}
-            >
-              {list.imageFile}
-            </div>
+              src={list.frontLectureImg}
+            />
           </div>
         ))}
       </Slider>
-      <div style={{ border: "1px solid #e9ecef", height: "64px" }}>
+      <div
+        style={{
+          border: "1px solid #e9ecef",
+          height: "64px",
+          marginTop: "-6px",
+        }}
+      >
         <DotLay>
-          <MoveButton><p>{`3 / ${eventData.length}`}</p>
-            <LeftOutlined style={{marginLeft:"25px"}}  />
-            <PauseOutlined onClick={() => setPause(!Pause)} />
-            <RightOutlined /></MoveButton>
+          <MoveButton>
+            <p>{`3 / ${eventData.length}`}</p>
+            <LeftOutlined style={{ marginLeft: "25px" }} />
+            <PauseOutlined
+              style={{ cursor: "pointer" }}
+              onClick={() => setPause(!Pause)}
+            />
+            <RightOutlined style={{ cursor: "pointer" }} />
+          </MoveButton>
+          <Wall />
         </DotLay>
       </div>
     </DivTab>
   );
 };
 
-const Pre = styled.div`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  left: 3%;
-  z-index: 3;
-`;
-
-const NextTo = styled.div`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 3%;
-  z-index: 3;
-`;
+export default Tab;
 
 const DivTab = styled.div`
   width: 100%;
@@ -153,7 +124,7 @@ const DotDesign = styled.p`
   cursor: pointer;
 `;
 
-const DotLay = styled.div`
+const DotLay = styled.a`
   max-width: 1200px;
   min-width: 769px;
   margin: auto;
@@ -161,7 +132,7 @@ const DotLay = styled.div`
   justify-content: left;
 `;
 
-const MoveButton = styled.p`
+const MoveButton = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -173,6 +144,16 @@ const MoveButton = styled.p`
   color: #fff;
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
+  margin-left: 25px;
+  margin-top: 12px;
 `;
 
-export default Tab;
+const Wall = styled.div`
+    margin: 0 1rem;
+    margin-top:13px;
+    margin-left:40px;
+    width: 1px;
+    height: 36px;
+    background-color: #dee2e6;
+}
+`;
