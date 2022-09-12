@@ -95,7 +95,7 @@ const SignUp = () => {
     handleErrorMessage();
 
     axios
-      .post("http://localhost:3001/signup", {
+      .post(`${process.env.REACT_APP_URL}/signup`, {
         email,
         password: pw,
       })

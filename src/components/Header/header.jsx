@@ -34,7 +34,7 @@ export default Header;
 
 const HeaderLayout = styled.div`
   min-width: 769px;
-  width: 100vw;
+  width: 100%;
   height: 64px;
   display: flex;
 `;
