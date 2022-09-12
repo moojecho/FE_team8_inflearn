@@ -19,7 +19,7 @@ const LectureList = () => {
   return (
     <CardLayout>
       {lectureData.map((list) => (
-        <LectureCard>
+        <LectureCard key={list.lectureId}>
           <LectureImg>{list.imageFile}</LectureImg>
           <p style={{ fontSize: "18px", fontWeight: "bold", marginLeft:"2px"  }}>{list.title}</p>
           <p style={{ fontSize: "14px", color: "#808080", marginTop:"30px", marginLeft:"2px" }}>{list.lecturer}</p>
@@ -46,7 +46,7 @@ const CardLayout = styled.div`
 const LectureCard = styled.div`
   width: 235px;
   height: 285px;
-  border: 2px solid black;
+  border: 1px solid black;
   margin:auto;
   margin-top:30px;
 `;
@@ -54,5 +54,5 @@ const LectureCard = styled.div`
 const LectureImg = styled.div`
   width: 232px;
   height: 157px;
-  border: 2px solid red;
+  border: 2px solid black;
 `;
