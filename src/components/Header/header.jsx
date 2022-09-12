@@ -49,6 +49,15 @@ const Button = styled.div`
   border-radius: 4px;
 `;
 
+const LoginButton = styled.div`
+height:35px;
+margin-right:10px;
+padding:6px;
+border: 1px solid #dbdbdb;
+border-radius:4px;
+cursor: pointer;
+`;
+
 const SignUpButton = styled.div`
   height: 35px;
   padding: 6px;
