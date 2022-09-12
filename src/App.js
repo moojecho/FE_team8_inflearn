@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import Lecture from "./components/lecture/Lecture";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
 
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/lecture" element={<Lecture />} />
       </Routes>
     </DivApp>
   );
