@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie, setCookie } from "./cookie";
 
 const instance = axios.create({
-  baseURL: "https://localhost:3001",
+  baseURL: process.env.REACT_APP_URL,
   headers: { "Content-type": "application/json" },
 });
 
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
         const originalRequest = config;
         const refreshToken = await getCookie("refreshToken");
         const { data } = await axios.post(
-          "http://localhost:3001/refreshToken",
+          `${process.env.REACT_APP_URL}/refreshToken`,
           {},
           { headers: { "Refresh-Token": refreshToken } }
         );

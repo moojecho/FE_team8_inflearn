@@ -29,7 +29,7 @@ const SignIn = ({ handleLoginScreen }) => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3001/login",
+        `${process.env.REACT_APP_URL}/login`,
         {
           email,
           password: pw,
