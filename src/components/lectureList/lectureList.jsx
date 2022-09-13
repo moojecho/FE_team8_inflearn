@@ -38,8 +38,8 @@ const Tab = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <LectureCard>
-            <LectureImg key={list.lectureId} src={list.frontLectureImg} />
+          <LectureCard key={list.id} >
+            <LectureImg src={list.frontLectureImg} />
             <LectureTitle>{list.frontLectureTitle}</LectureTitle>
             <p
               style={{
@@ -96,7 +96,6 @@ const NextTo = styled.div`
 
 const DivTab = styled.div`
   width: 100%;
-  height: 384px;
 
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
@@ -111,10 +110,7 @@ const DivTab = styled.div`
 `;
 
 const LectureCard = styled.div`
-  width: 250px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
+  cursor:pointer;
 
   &:hover {
     width: 250px;
@@ -123,7 +119,7 @@ const LectureCard = styled.div`
     top: 0;
     height: 300px;
     background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    color: black;
     font-size: 13px;
     padding: 8px;
   }

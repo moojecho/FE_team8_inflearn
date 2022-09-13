@@ -38,8 +38,8 @@ const LectureMiddle = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <LectureCard>
-            <LectureImg key={list.lectureId} src={list.frontLectureImg} />
+          <LectureCard key={list.id}>
+            <LectureImg  src={list.frontLectureImg} />
             <LectureTitle>{list.frontLectureTitle}</LectureTitle>
             <p
               style={{
@@ -111,6 +111,7 @@ const DivTab = styled.div`
 const LectureCard = styled.div`
   height: 285px;
   margin: auto;
+  cursor:pointer;
 `;
 
 const LectureImg = styled.img`

@@ -14,7 +14,7 @@ const LectureBottom = () => {
     const getData = async () => {
       await instance
         .get(`/api/lecture`)
-        .then((res) => setLectureData(res.data.filter((list)=>list.backLevel=="중급이상")));
+        .then((res) => setLectureData(res.data.filter((list)=>list.backLevel=="중급이상").slice(0,3)));
     };
 
     getData();
@@ -36,7 +36,7 @@ const LectureBottom = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <LectureCard key={list.lectureId}>
+          <LectureCard key={list.id}>
             <LectureImg 
               src={list.frontLectureImg}
             ></LectureImg>
@@ -85,9 +85,7 @@ const DivTab = styled.div`
 
 const LectureCard = styled.div`
   height: 285px;
-  &:hover{
-    background-color:black;
-  }
+  cursor:pointer;
 `;
 
 const LectureImg = styled.img`
