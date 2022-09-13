@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "../sign-in/SignIn";
-import { useSelector, useDispatch } from "react-redux/es/exports";
 import { getCookie, deleteCookie } from "../../shared/cookie";
-import { setUser } from "../../redux/modules/user";
 
 const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [login, setLogin] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-
-  const username = useSelector((state) => state.user.user);
+  const nickname = getCookie("nickname");
 
   useEffect(() => {
     if (getCookie("accessToken") || getCookie("refreshToken")) {
@@ -20,7 +16,7 @@ const Header = () => {
     } else {
       setIsLogin(false);
     }
-  }, [username]);
+  }, []);
 
   const handleLoginScreen = () => {
     setLogin(false);
@@ -28,9 +24,10 @@ const Header = () => {
 
   const handleLogout = () => {
     setIsLogin(false);
-    dispatch(setUser(""));
+    deleteCookie("nickname");
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
+    window.location.reload();
   };
   return (
     <>
@@ -52,7 +49,7 @@ const Header = () => {
         <Button>
           {isLogin ? (
             <>
-              <Greetings>{username}님</Greetings>
+              <Greetings>{nickname}님</Greetings>
               <SignUpLogoutButton onClick={handleLogout}>
                 로그아웃
               </SignUpLogoutButton>
@@ -97,23 +94,26 @@ const Button = styled.div`
 `;
 
 const LoginButton = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
-  width: 59px;
+  width: 75px;
   height: 35px;
-  margin-right: 8px;
-  padding-left: 7px;
+  margin: auto 8px auto;
   padding-top: 5px;
   color: #363636;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   cursor: pointer;
+  text-align: center;
 `;
 
 const SignUpLogoutButton = styled.div`
-  width:75px;
+  font-family: "Noto Sans KR", sans-serif;
+  width: 75px;
   height: 35px;
   font-size: 15px;
-  padding-left: 7px;
+  margin: auto;
+  text-align: center;
   padding-top: 5px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
@@ -129,4 +129,5 @@ const Greetings = styled.span`
   font-family: "Noto Sans KR", sans-serif;
   margin-right: 10px;
   font-size: 16px;
+  margin-top: 3px;
 `;

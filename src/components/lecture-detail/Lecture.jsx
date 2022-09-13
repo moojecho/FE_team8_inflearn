@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillStar } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
 import { HiHashtag } from "react-icons/hi";
+import Star from "./Star";
 
-const Lecture = () => {
+const Lecture = ({ commentCount, entireScore }) => {
   return (
     <Section>
       <LectureHeader>
@@ -21,26 +21,17 @@ const Lecture = () => {
             <Title>만들고 비교하며 학습하는 리액트 (React)</Title>
             <Info>
               <InfoStarBox>
-                <InfoStar>
-                  <EmptyStar>
-                    <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                    <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                    <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                    <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                    <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                  </EmptyStar>
-                  <FillStar>
-                    <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                    <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                    <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                    <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                    <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                  </FillStar>
-                </InfoStar>
-                <InfoScore>(4.8)</InfoScore>
+                <Star
+                  width={"14px"}
+                  height={"14px"}
+                  boxWidth={70}
+                  score={entireScore}
+                />
+                <InfoScore>({entireScore})</InfoScore>
               </InfoStarBox>
               <CountComment>
-                <strong style={{ fontWeight: "700" }}>66개</strong>의 수강평
+                <strong style={{ fontWeight: "700" }}>{commentCount}개</strong>
+                의 수강평
               </CountComment>
             </Info>
             <Instructor>
@@ -143,28 +134,12 @@ const InfoStarBox = styled.span`
   height: 20px;
 `;
 
-const InfoStar = styled.div`
-  width: 70px;
-  position: relative;
-`;
-
 const InfoScore = styled.strong`
   font-style: inherit;
   font-size: 14px;
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
-`;
-
-const EmptyStar = styled.div``;
-
-const FillStar = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  width: calc(70px * (4.8 / 5));
 `;
 
 const CountComment = styled.span`

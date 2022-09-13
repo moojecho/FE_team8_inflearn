@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillStar } from "react-icons/ai";
+import Star from "./Star";
 import Comment from "./Comment";
+import CommentForm from "./CommentForm";
 
-const CommentList = () => {
+const CommentList = ({ nickname, comments, onSubmitHandler }) => {
   return (
     <CommentBox>
       <Header>
@@ -13,82 +14,7 @@ const CommentList = () => {
       <DashBoard>
         <DashBoardStar>
           <DashBoardStarNum>4.8</DashBoardStarNum>
-          <DashBoardStarImage>
-            <EmptyStar>
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-            </EmptyStar>
-            <FillStar>
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-            </FillStar>
-          </DashBoardStarImage>
+          <Star width={"20px"} height={"20px"} boxWidth={100} score={4.8} />
           <DashBoardStarText>66개의 수강평</DashBoardStarText>
         </DashBoardStar>
         <DashBoardGraph>
@@ -130,7 +56,10 @@ const CommentList = () => {
         </DashBoardGraph>
       </DashBoard>
       <ReviewList>
-        <Comment />
+        {nickname ? <CommentForm onSubmitHandler={onSubmitHandler} /> : null}
+        {comments?.map((comment) => (
+          <Comment {...comment} key={comment.id} />
+        ))}
       </ReviewList>
     </CommentBox>
   );
@@ -197,23 +126,6 @@ const DashBoardStarNum = styled.div`
   font-weight: 700;
   color: #343a40;
   font-family: "Noto Sans KR", sans-serif;
-`;
-
-const DashBoardStarImage = styled.div`
-  position: relative;
-  width: 100px;
-  margin-bottom: 5px;
-`;
-
-const EmptyStar = styled.div``;
-
-const FillStar = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  width: calc(100px * (4.8 / 5));
 `;
 
 const DashBoardStarText = styled.span`

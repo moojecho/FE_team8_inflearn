@@ -4,13 +4,10 @@ import { GrClose } from "react-icons/gr";
 import ModalBackground from "../modal/ModalBackground";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
-import { useDispatch } from "react-redux/es/exports";
 import { setCookie } from "../../shared/cookie";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../../redux/modules/user";
 
 const SignIn = ({ handleLoginScreen }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
@@ -41,7 +38,6 @@ const SignIn = ({ handleLoginScreen }) => {
       if (!response.data.success) {
         alert(response.data.error.message);
       } else {
-        dispatch(setUser(response.data.data.nickname));
         const accessToken = response.headers["authorization"].split(" ")[1];
         const refreshToken = response.headers["refresh-token"];
         setCookie("accessToken", accessToken, {
@@ -51,7 +47,8 @@ const SignIn = ({ handleLoginScreen }) => {
         setCookie("refreshToken", refreshToken, {
           path: "/",
         });
-        navigate("/");
+        setCookie("nickname", response.data.data.nickname);
+        window.location.reload();
         handleLoginScreen();
       }
     } catch (error) {
