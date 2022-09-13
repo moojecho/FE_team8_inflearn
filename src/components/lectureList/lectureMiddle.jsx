@@ -52,16 +52,23 @@ const LectureMiddle = () => {
               {list.frontInstructor}
             </p>
             <p style={{ marginLeft: "3px" }}>{list.star}</p>
-            <p
+            <div
               style={{
                 fontSize: "18px",
                 fontWeight: "bold",
                 color: "#2565AE",
                 marginLeft: "2px",
+                display: "flex",
+                flexDirection: "row",
               }}
             >
-              {list.frontOriginPrice}
-            </p>
+              {list.frontOriginPrice == "무료" ? (
+                list.frontOriginPrice
+              ) : (
+                <OriginPrice>{list.frontOriginPrice}</OriginPrice>
+              )}
+              {list.frontDiscountPrice}
+            </div>
           </LectureCard>
         ))}
       </Slider>
@@ -122,4 +129,12 @@ overflow: hidden;
 text-overflow: ellipsis;
 `;
 
+ const OriginPrice = styled.p`
+  color: #595959;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin: 3px;
+  text-decoration: line-through;
+`;
 export default LectureMiddle;

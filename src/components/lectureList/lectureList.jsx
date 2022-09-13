@@ -52,16 +52,23 @@ const Tab = () => {
               {list.frontInstructor}
             </p>
             <p style={{ marginLeft: "3px" }}>{list.star}</p>
-            <p
+            <div
               style={{
                 fontSize: "18px",
                 fontWeight: "bold",
                 color: "#2565AE",
                 marginLeft: "2px",
+                display: "flex",
+                flexDirection: "row",
               }}
             >
-              {list.frontOriginPrice}
-            </p>
+              {list.frontOriginPrice == "무료" ? (
+                list.frontOriginPrice
+              ) : (
+                <OriginPrice>{list.frontOriginPrice}</OriginPrice>
+              )}
+              {list.frontDiscountPrice}
+            </div>
           </LectureCard>
         ))}
       </Slider>
@@ -104,18 +111,18 @@ const DivTab = styled.div`
 `;
 
 const LectureCard = styled.div`
-width:250px;
+  width: 250px;
   height: 300px;
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
 
-  &:hover{
-    width:250px;
+  &:hover {
+    width: 250px;
     display: none;
     position: absolute;
     top: 0;
     height: 300px;
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     font-size: 13px;
     padding: 8px;
@@ -125,8 +132,8 @@ width:250px;
 const LectureImg = styled.img`
   width: 240px;
   height: 157px;
-  margin:auto;
-  z-index:2;
+  margin: auto;
+  z-index: 2;
 `;
 
 const LectureTitle = styled.p`
@@ -138,5 +145,13 @@ const LectureTitle = styled.p`
   white-space: no-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+`;
+
+const OriginPrice = styled.p`
+  color: #595959;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin: 3px;
+  text-decoration: line-through;
 `;

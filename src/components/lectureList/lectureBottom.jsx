@@ -109,4 +109,13 @@ height: 45px;
   text-overflow: ellipsis;
 `;
 
+const OriginPrice = styled.p`
+  color: #595959;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin: 3px;
+  text-decoration: line-through;
+`;
+
 export default LectureBottom;
