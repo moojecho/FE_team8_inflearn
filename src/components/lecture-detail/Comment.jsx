@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillStar } from "react-icons/ai";
+import Star from "./Star";
 
-const Comment = () => {
+const Comment = ({ content, nickname, star }) => {
   return (
     <Review>
       <ReviewHeader>
@@ -12,28 +12,13 @@ const Comment = () => {
         />
         <UserInfo>
           <StarBox>
-            <Star>
-              <EmptyStar>
-                <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-                <AiFillStar style={{ color: "rgb(222, 226, 230)" }} />
-              </EmptyStar>
-              <FillStar>
-                <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-                <AiFillStar style={{ color: "rgb(255, 200, 7)" }} />
-              </FillStar>
-            </Star>
-            <Score>5</Score>
+            <Star width={"14px"} height={"14px"} boxWidth={70} score={star} />
+            <Score>{star}</Score>
           </StarBox>
-          <Name>인프런</Name>
+          <Name>{nickname}</Name>
         </UserInfo>
       </ReviewHeader>
-      <ReviewBody>강의 정말 유익했습니다.</ReviewBody>
+      <ReviewBody>{content}</ReviewBody>
       <ReviewDate>2022-09-12</ReviewDate>
     </Review>
   );
@@ -69,24 +54,6 @@ const StarBox = styled.div`
   display: inline-flex;
   align-items: center;
   margin-right: 4px;
-`;
-
-const Star = styled.div`
-  width: 70px;
-  position: relative;
-  margin-right: 2px;
-  margin-bottom: 4px;
-`;
-
-const EmptyStar = styled.div``;
-
-const FillStar = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  width: calc(70px * (5 / 5));
 `;
 
 const Score = styled.span`

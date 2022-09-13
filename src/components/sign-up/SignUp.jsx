@@ -63,8 +63,9 @@ const SignUp = () => {
     }
   };
 
-  // 에러메시지
-  const handleErrorMessage = () => {
+  // 회원가입 제출
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
     if (!validEmail) {
       setModal(true);
       setErrMsg("이메일 형식이 올바르지 않습니다.");
@@ -87,28 +88,25 @@ const SignUp = () => {
       setErrMsg("비밀번호가 일치하지 않습니다.");
       return;
     }
-  };
 
-  // 회원가입 제출
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    handleErrorMessage();
-
-    axios
-      .post(`${process.env.REACT_APP_URL}/api/member/signup`, {
-        email,
-        password: pw,
-      })
-      .then((response) => {
-        if (response.data.success) {
-          alert(response.data.data);
-          document.location.href = "/";
-        } else {
-          setModal(true);
-          setErrMsg("이미 가입된 이메일 주소입니다.");
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/api/member/signup`,
+        {
+          email,
+          password: pw,
         }
-      })
-      .catch((error) => alert(error.response.data.error.message));
+      );
+      if (response.data.success) {
+        alert(response.data.data);
+        document.location.href = "/";
+      } else {
+        setModal(true);
+        setErrMsg("이미 가입된 이메일 주소입니다.");
+      }
+    } catch (error) {
+      alert(error.response.data.error.message);
+    }
   };
 
   return (
