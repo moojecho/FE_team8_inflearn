@@ -22,7 +22,6 @@ const Lecture = ({
             <Thunbnail src={lectureImg} alt="thumbnail" />
           </ThumbnailContainer>
           <LectureDiscription>
-            <BreadCrumb>개발·프로그래밍 프론트엔드</BreadCrumb>
             <Title>{title}</Title>
             <Info>
               <InfoStarBox>
@@ -104,14 +103,6 @@ const LectureDiscription = styled.div`
   max-width: 58.33333333%;
   display: flex;
   flex-direction: column;
-`;
-
-const BreadCrumb = styled.span`
-  margin-bottom: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Title = styled.span`

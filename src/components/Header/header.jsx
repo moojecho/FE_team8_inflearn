@@ -78,7 +78,7 @@ const HeaderLayout = styled.div`
   margin: auto;
   display: flex;
   justify-content: center;
-  box-shadow:0 2px 4px 0 hsl(0deg 0% 95% / 50%);
+  box-shadow: 0 2px 4px 0 hsl(0deg 0% 95% / 50%);
   z-index: 5;
   position: relative;
 `;
