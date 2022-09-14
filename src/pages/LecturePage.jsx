@@ -11,12 +11,7 @@ const LecturePage = () => {
   const [comments, setComments] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
   const [entireScore, setEntireScore] = useState(0);
-  // let commentCount = Array.from(comments).length;
-  // let entireScore = (
-  //   Array.from(comments)
-  //     .map((comment) => comment.star)
-  //     .reduce((arr, cur) => arr + cur, 0) / commentCount
-  // ).toFixed(1);
+
   const getComments = async () => {
     const { data } = await instance.get("/api/review");
     setComments(data.data);
@@ -83,6 +78,27 @@ const LecturePage = () => {
     }
   };
 
+  const onDeleteHandler = async (payload) => {
+    try {
+      await instance.delete(`/api/auth/review/${payload}`, payload);
+      const newComments = comments.filter((comment) => comment.id !== payload);
+      setComments(newComments);
+      setCommentCount(commentCount - 1);
+      setEntireScore(
+        Math.floor(
+          (newComments
+            .map((comment) => comment.star)
+            .reduce((arr, cur) => arr + cur, 0) /
+            Array.from(newComments).length) *
+            10
+        ) / 10
+      );
+      alert("수강평이 삭제되었습니다!");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   useEffect(() => {
     getComments();
   }, []);
@@ -99,6 +115,7 @@ const LecturePage = () => {
         commentCount={commentCount}
         entireScore={entireScore}
         onEditHandler={onEditHandler}
+        onDeleteHandler={onDeleteHandler}
       />
     </>
   );

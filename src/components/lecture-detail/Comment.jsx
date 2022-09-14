@@ -10,10 +10,18 @@ import { GrClose } from "react-icons/gr";
 import { AiFillStar } from "react-icons/ai";
 import { BsExclamationTriangle } from "react-icons/bs";
 
-const Comment = ({ id, content, nickname, star, onEditHandler }) => {
+const Comment = ({
+  id,
+  content,
+  nickname,
+  star,
+  onEditHandler,
+  onDeleteHandler,
+}) => {
   const [isValid, setIsValid] = useState(false);
   const [editDeleteButton, setEditDeleteButton] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const [newScore, setNewScore] = useState(star);
   const [newContent, setNewContent] = useState(content);
@@ -52,6 +60,11 @@ const Comment = ({ id, content, nickname, star, onEditHandler }) => {
     setEditDeleteButton(false);
   };
 
+  const onSubmitDeleteHandler = () => {
+    setDeleteModal(false);
+    onDeleteHandler(id);
+  };
+
   useEffect(() => {
     username === nickname ? setIsValid(true) : setIsValid(false);
   }, [username, nickname]);
@@ -63,10 +76,35 @@ const Comment = ({ id, content, nickname, star, onEditHandler }) => {
 
   return (
     <>
+      {deleteModal ? (
+        <>
+          <ModalBackground zIndex={1010} />
+          <ModalSection zIndex={1011}>
+            <BsExclamationTriangle
+              style={{
+                width: "56px",
+                height: "50px",
+                color: "#f3a32d",
+                marginBottom: "20px",
+              }}
+            />
+            <ModalTitle>수강평 삭제</ModalTitle>
+            <ModalErrorMessage>수강평을 삭제하시겠습니까?</ModalErrorMessage>
+            <EditButtonBox>
+              <EditCancelButton onClick={() => setDeleteModal(false)}>
+                취소
+              </EditCancelButton>
+              <ModalConFirmButton type="button" onClick={onSubmitDeleteHandler}>
+                확인
+              </ModalConFirmButton>
+            </EditButtonBox>
+          </ModalSection>
+        </>
+      ) : null}
       {errModal ? (
         <>
           <ModalBackground zIndex={1012} />
-          <ErrModalSection>
+          <ModalSection zIndex={1013}>
             <BsExclamationTriangle
               style={{
                 width: "56px",
@@ -83,13 +121,13 @@ const Comment = ({ id, content, nickname, star, onEditHandler }) => {
             >
               확인
             </ModalConFirmButton>
-          </ErrModalSection>
+          </ModalSection>
         </>
       ) : null}
       {editModal ? (
         <>
           <ModalBackground zIndex={1010} />
-          <ModalSection onSubmit={onSubmitEditComment}>
+          <ModalForm onSubmit={onSubmitEditComment}>
             <CloseButton type="button" onClick={() => setEditModal(false)}>
               <GrClose />
             </CloseButton>
@@ -191,7 +229,7 @@ const Comment = ({ id, content, nickname, star, onEditHandler }) => {
               </EditCancelButton>
               <EditSubmitButton>저장하기</EditSubmitButton>
             </EditButtonBox>
-          </ModalSection>
+          </ModalForm>
         </>
       ) : null}
       <Review>
@@ -230,7 +268,10 @@ const Comment = ({ id, content, nickname, star, onEditHandler }) => {
                     />
                     수정
                   </EditButton>
-                  <EditButton style={{ borderTop: "1px solid #dee2e6" }}>
+                  <EditButton
+                    style={{ borderTop: "1px solid #dee2e6" }}
+                    onClick={() => setDeleteModal(true)}
+                  >
                     <RiDeleteBin6Line
                       style={{
                         marginRight: "2px",
@@ -341,7 +382,7 @@ const EditButton = styled.div`
   font-family: "Noto Sans KR", sans-serif;
 `;
 
-const ModalSection = styled.form`
+const ModalForm = styled.form`
   width: 512px;
   height: 432px;
   padding: 20px 20px 32px;
@@ -477,7 +518,7 @@ const ModalConFirmButton = styled.button`
   }
 `;
 
-const ErrModalSection = styled.section`
+const ModalSection = styled.section`
   width: 416px;
   height: 290px;
   padding: 24px;
@@ -487,7 +528,7 @@ const ErrModalSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1013;
+  z-index: ${(props) => props.zIndex};
   background-color: #fff;
   left: 50%;
   top: 50%;

@@ -42,7 +42,7 @@ const SignIn = ({ handleLoginScreen }) => {
         const refreshToken = response.headers["refresh-token"];
         setCookie("accessToken", accessToken, {
           path: "/",
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          expires: new Date(Date.now() + 30 * 60 * 1000),
         });
         setCookie("refreshToken", refreshToken, {
           path: "/",
