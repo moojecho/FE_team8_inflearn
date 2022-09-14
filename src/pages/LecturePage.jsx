@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header/header";
 import CommentList from "../components/lecture-detail/CommentList";
-import Discription from "../components/lecture-detail/Discription";
+import Description from "../components/lecture-detail/Description";
 import Lecture from "../components/lecture-detail/Lecture";
 import { getCookie } from "../shared/cookie";
 import axios from "axios";
@@ -99,15 +99,19 @@ const LecturePage = () => {
       const newComments = comments.filter((comment) => comment.id !== payload);
       setComments(newComments);
       setCommentCount(commentCount - 1);
-      setEntireScore(
-        Math.floor(
-          (newComments
-            .map((comment) => comment.star)
-            .reduce((arr, cur) => arr + cur, 0) /
-            Array.from(newComments).length) *
-            10
-        ) / 10
-      );
+      if (newComments.length === 0) {
+        setEntireScore(0);
+      } else {
+        setEntireScore(
+          Math.floor(
+            (newComments
+              .map((comment) => comment.star)
+              .reduce((arr, cur) => arr + cur, 0) /
+              Array.from(newComments).length) *
+              10
+          ) / 10
+        );
+      }
       alert("수강평이 삭제되었습니다!");
     } catch (err) {
       alert(err.message);
@@ -127,7 +131,7 @@ const LecturePage = () => {
         entireScore={entireScore}
         {...lecture}
       />
-      <Discription discription={lecture.discription} />
+      <Description description={lecture.description} />
       <CommentList
         nickname={nickname}
         comments={comments}

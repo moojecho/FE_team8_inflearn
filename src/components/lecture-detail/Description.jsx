@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Discription = ({ discription }) => {
+const Description = ({ description }) => {
   return (
     <Container>
-      <Body>{discription}</Body>
+      <Body>{description}</Body>
     </Container>
   );
 };
 
-export default Discription;
+export default Description;
 
 const Container = styled.div`
   margin: 0 auto;
@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Body = styled.span`
-  font-size: 22px;
+  font-size: 16px;
   font-family: "Noto Sans KR", sans-serif;
   color: #343a40;
 `;

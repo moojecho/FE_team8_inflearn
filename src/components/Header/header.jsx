@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SignIn from "../sign-in/SignIn";
 import { getCookie, deleteCookie } from "../../shared/cookie";
+import instance from "../../shared/api";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,7 +23,12 @@ const Header = () => {
     setLogin(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await instance.post("/api/auth/member/logout");
+    } catch (err) {
+      alert(err.message);
+    }
     setIsLogin(false);
     deleteCookie("nickname");
     deleteCookie("accessToken");
@@ -42,7 +48,7 @@ const Header = () => {
             height: "47px",
             display: "block",
           }}
-          src="img/chuseok_logo.png"
+          src="/img/chuseok_logo.png"
           alt="logo"
           onClick={() => navigate("/")}
         />
