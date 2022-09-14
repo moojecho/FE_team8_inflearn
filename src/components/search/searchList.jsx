@@ -1,28 +1,130 @@
-import React, {useRef , useEffect , useState} from "react";
-import  {useDispatch}  from "react-redux";
-import instance from "../../shared/api"
+import React, { useRef, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { SearchOutlined } from "@ant-design/icons";
 
-import Skil from "./skilReco"
-import __searchList from "../../redux/modules/lectureSlice"
+import __searchList from "../../redux/modules/lectureSlice";
 
 const SearchList = () => {
-  const [lectureData, setLectureData] = useState([]);
+  const lectureList = useSelector((state) => state.lecture.lecture);
+  const [lectures, setLectures] = useState([]);
+  useEffect(() => {
+    setLectures(lectureList);
+  }, [lectureList]);
+
+  console.log(lectures);
   return (
-    <div></div>
+    <ListLayout>
+      <p style={{ fontSize: "18px", color: "#454545",fontWeight:"bold", margin: "10px" }}>전체</p>
+      <ResultLayout>
+        {lectures
+          ? lectures.map((list) => (
+              <LectureCard key={list.id}>
+                <LectureImg src={list.lectureImg} />
+                <LectureTitle>{list.title}</LectureTitle>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "#808080",
+                    marginTop: "30px",
+                    marginLeft: "2px",
+                  }}
+                >
+                  {list.instructor}
+                </p>
+                <p style={{ marginLeft: "3px" }}>{list.star}</p>
+                <div
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    color: "#2565AE",
+                    marginLeft: "2px",
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  {list.originPrice == "무료" ? (
+                    list.originPrice
+                  ) : (
+                    <OriginPrice>{list.originPrice}</OriginPrice>
+                  )}
+                  {list.discountPrice}
+                </div>
+              </LectureCard>
+            ))
+          : <NoneResult style={{marginTop:"15px" ,color:"gray"}}>검색 결과를 불러오지 못했어요..😭</NoneResult>}
+      </ResultLayout>
+    </ListLayout>
   );
 };
 
 export default SearchList;
 
-const InputLayout = styled.div`
-  max-width: 1200px;
-  min-width: 769px;
+const ListLayout = styled.div`
   width: 100vw;
-  height: 200px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 `;
- 
+
+const ResultLayout = styled.div`
+  max-width: 990px;
+  min-width: 500px;
+  min-height:555px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-Top: 1px solid #e4e4e4;
+  margin-left:10px;
+`;
+
+const NoneResult = styled.p`
+font-size:30px;
+display:flex;
+justify-content:start;
+`;
+
+const LectureCard = styled.div`
+  width: 240px;
+  height: 330px;
+  cursor: pointer;
+
+  &:hover {
+    width: 250px;
+    display: none;
+    position: absolute;
+    top: 0;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: black;
+    font-size: 13px;
+    padding: 8px;
+  }
+`;
+
+const LectureImg = styled.img`
+  width: 225px;
+  height: 145px;
+  margin: auto;
+  z-index: 2;
+`;
+
+const LectureTitle = styled.p`
+  height: 45px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #454545;
+  margin-top: 10px;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const OriginPrice = styled.p`
+  color: #595959;
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin: 3px;
+  text-decoration: line-through;
+`;
