@@ -5,23 +5,32 @@ import Discription from "../components/lecture-detail/Discription";
 import Lecture from "../components/lecture-detail/Lecture";
 import { getCookie } from "../shared/cookie";
 import instance from "../shared/api";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux/es/exports";
 
 const LecturePage = () => {
   const nickname = getCookie("nickname");
+  const param = useParams();
+  const lecture = useSelector((state) => state.lecture.data).filter(
+    (element) => element.id === Number(param.id)
+  );
   const [comments, setComments] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
   const [entireScore, setEntireScore] = useState(0);
 
   const getComments = async () => {
     const { data } = await instance.get("/api/review");
-    setComments(data.data);
-    setCommentCount(Array.from(data.data).length);
+    const reviews = Array.from(data.data).filter(
+      (comment) => comment.lectureId === Number(param.id)
+    );
+    setComments(reviews);
+    setCommentCount(Array.from(reviews).length);
     const score =
       Math.floor(
-        (data.data
+        (reviews
           .map((comment) => comment.star)
           .reduce((arr, cur) => arr + cur, 0) /
-          Array.from(data.data).length) *
+          Array.from(reviews).length) *
           10
       ) / 10;
     setEntireScore(score);
@@ -54,9 +63,6 @@ const LecturePage = () => {
         `/api/auth/review/${payload[0].id}`,
         payload[0]
       );
-      console.log(payload);
-      console.log(payload[0]);
-      console.log(payload[1]);
       alert("수강평 수정 완료!");
       const newComments = comments.map((comment) =>
         comment.id === response.data.data.id
@@ -106,8 +112,12 @@ const LecturePage = () => {
   return (
     <>
       <Header />
-      <Lecture commentCount={commentCount} entireScore={entireScore} />
-      <Discription />
+      <Lecture
+        commentCount={commentCount}
+        entireScore={entireScore}
+        {...lecture}
+      />
+      <Discription discription={lecture.discription} />
       <CommentList
         nickname={nickname}
         comments={comments}

@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/lecture" element={<LecturePage />} />
+        <Route path="/lecture/:id" element={<LecturePage />} />
         <Route path="/search" element={<SearchListPage />} />
       </Routes>
     </DivApp>
