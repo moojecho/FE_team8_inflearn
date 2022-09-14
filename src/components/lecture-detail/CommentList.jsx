@@ -11,6 +11,7 @@ const CommentList = ({
   commentCount,
   entireScore,
   onEditHandler,
+  onDeleteHandler,
 }) => {
   const five = Array.from(comments).filter(
     (comment) => comment.star === 5
@@ -107,6 +108,7 @@ const CommentList = ({
             {...comment}
             key={comment.id}
             onEditHandler={onEditHandler}
+            onDeleteHandler={onDeleteHandler}
           />
         ))}
       </ReviewList>
