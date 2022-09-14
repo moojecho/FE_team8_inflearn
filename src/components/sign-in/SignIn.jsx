@@ -63,7 +63,7 @@ const SignIn = ({ handleLoginScreen }) => {
         <CloseButton type="button" onClick={handleLoginScreen}>
           <GrClose />
         </CloseButton>
-        <Logo src="img/logo1.png" />
+        <Logo src="/img/logo1.png" />
         <form onSubmit={handleSubmit}>
           <SignInInputBox>
             <SignInInput
@@ -127,6 +127,7 @@ const CloseButton = styled.span`
   width: 312px;
   text-align: end;
   cursor: pointer;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Logo = styled.img`
@@ -154,6 +155,7 @@ const SignInInputBox = styled.div`
 `;
 
 const SignInInput = styled.input`
+  font-family: "Noto Sans KR", sans-serif;
   width: 100%;
   height: 100%;
   border: 0;
@@ -171,6 +173,7 @@ const SignInInput = styled.input`
 `;
 
 const SignInButton = styled.button`
+  font-family: "Noto Sans KR", sans-serif;
   width: 320px;
   height: 48px;
   margin-top: 16px;
@@ -186,6 +189,7 @@ const SignInButton = styled.button`
 `;
 
 const SingUpButton = styled.span`
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #616568;

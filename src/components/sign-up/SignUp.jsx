@@ -252,6 +252,7 @@ const ModalTitle = styled.span`
   margin-bottom: 6px;
   color: #212529;
   text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const ModalErrorMessage = styled.span`
@@ -259,6 +260,7 @@ const ModalErrorMessage = styled.span`
   color: #343a40;
   text-align: center;
   word-break: break-word;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const ModalCloseButton = styled.button`
@@ -292,6 +294,7 @@ const Section = styled.section`
 const SignUpTitle = styled.h2`
   font-size: 26px;
   font-weight: 500;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const SignUpMessage = styled.h3`
@@ -299,6 +302,7 @@ const SignUpMessage = styled.h3`
   font-weight: 350;
   color: #000a12;
   margin-bottom: 16px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const SignUpLabel = styled.label`
@@ -307,6 +311,7 @@ const SignUpLabel = styled.label`
   font-size: 13px;
   font-weight: 400;
   color: #3e4042;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const SignUpInputBox = styled.div`
@@ -328,6 +333,7 @@ const SignUpInputBox = styled.div`
 `;
 
 const SignUpInput = styled.input`
+  font-family: "Noto Sans KR", sans-serif;
   width: 100%;
   height: 100%;
   letter-spacing: ${(props) => props.letterSpacing};
@@ -353,18 +359,21 @@ const SignUpButton = styled.button`
   letter-spacing: -0.3px;
   font-weight: 700;
   cursor: pointer;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const PwNote = styled.p`
   display: flex;
   flex-direction: column;
   margin-top: 4px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const PwMessage = styled.span`
   font-size: 12px;
   color: ${(props) => props.color};
   letter-spacing: -0.3px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const CheckMessage = styled.p`
@@ -372,6 +381,7 @@ const CheckMessage = styled.p`
   color: #e5503c;
   letter-spacing: -0.3px;
   margin-top: 4px;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const Toggle = styled.span`

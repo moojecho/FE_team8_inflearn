@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BsPerson } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
@@ -14,6 +14,12 @@ const Lecture = ({
   level,
   skill,
 }) => {
+  const [keywords, setKeywords] = useState(skill);
+
+  useEffect(() => {
+    setKeywords(skill);
+  }, [skill]);
+
   return (
     <Section>
       <LectureHeader>
@@ -47,7 +53,7 @@ const Lecture = ({
                 style={{ width: "16px", height: "16px", color: "#fff" }}
               />
             </Instructor>
-            <div>
+            <HashTagBox>
               <HiHashtag
                 style={{
                   width: "16px",
@@ -56,7 +62,17 @@ const Lecture = ({
                   marginRight: "6px",
                 }}
               />
-            </div>
+              <Keyword type="button">{level}</Keyword>
+              {keywords &&
+                keywords
+                  .replace(/ /gi, "")
+                  .split(",")
+                  .map((keyword) => (
+                    <Keyword type="button" key={keyword}>
+                      {keyword}
+                    </Keyword>
+                  ))}
+            </HashTagBox>
           </LectureDiscription>
         </LectureContainer>
       </LectureHeader>
@@ -155,4 +171,26 @@ const InstructorName = styled.span`
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
+`;
+
+const Keyword = styled.button`
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  margin-right: 4px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background-color: #173f51;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #26556a;
+  }
+`;
+
+const HashTagBox = styled.div`
+  vertical-align: baseline;
+  display: flex;
+  align-items: center;
 `;
