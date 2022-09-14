@@ -4,36 +4,45 @@ import CommentList from "../components/lecture-detail/CommentList";
 import Discription from "../components/lecture-detail/Discription";
 import Lecture from "../components/lecture-detail/Lecture";
 import { getCookie } from "../shared/cookie";
+import axios from "axios";
 import instance from "../shared/api";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux/es/exports";
 
 const LecturePage = () => {
   const nickname = getCookie("nickname");
   const param = useParams();
-  const lecture = useSelector((state) => state.lecture.data).filter(
-    (element) => element.id === Number(param.id)
-  );
+
+  const getlecture = async () => {
+    const { data } = await axios.get(
+      process.env.REACT_APP_URL + "/api/lecture/" + param.id
+    );
+    setLecture(data.data);
+  };
+  const [lecture, setLecture] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
   const [entireScore, setEntireScore] = useState(0);
 
   const getComments = async () => {
-    const { data } = await instance.get("/api/review");
+    const { data } = await axios.get(process.env.REACT_APP_URL + "/api/review");
     const reviews = Array.from(data.data).filter(
       (comment) => comment.lectureId === Number(param.id)
     );
     setComments(reviews);
     setCommentCount(Array.from(reviews).length);
-    const score =
-      Math.floor(
-        (reviews
-          .map((comment) => comment.star)
-          .reduce((arr, cur) => arr + cur, 0) /
-          Array.from(reviews).length) *
-          10
-      ) / 10;
-    setEntireScore(score);
+    if (Array.from(reviews).length === 0) {
+      setEntireScore(0);
+    } else {
+      setEntireScore(
+        Math.floor(
+          (reviews
+            .map((comment) => comment.star)
+            .reduce((arr, cur) => arr + cur, 0) /
+            Array.from(reviews).length) *
+            10
+        ) / 10
+      );
+    }
   };
 
   const onSubmitHandler = async (payload) => {
@@ -107,6 +116,7 @@ const LecturePage = () => {
 
   useEffect(() => {
     getComments();
+    getlecture();
   }, []);
 
   return (
