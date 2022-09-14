@@ -38,7 +38,7 @@ const Header = () => {
       <HeaderLayout>
         <img
           style={{
-            marginLeft: "16px",
+            marginLeft: "25px",
             marginTop: "8px",
             cursor: "pointer",
             maxWidth: "100%",

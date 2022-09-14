@@ -1,31 +1,30 @@
-import React, {useRef , useEffect , useState} from "react";
-import  {useDispatch}  from "react-redux";
-import instance from "../../shared/api"
+import React, { useRef, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import instance from "../../shared/api";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 
-import Skil from "./skilReco"
-import SearchList from "./searchList"
-import __searchList from "../../redux/modules/lectureSlice"
+import Skil from "./skilReco";
+import SearchList from "./searchList";
+import {__searchList,__getLectureList} from "../../redux/modules/lectureSlice";
 
 const Search = () => {
   const inputRef = useRef(null);
-  const [lectureData, setLectureData] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const getData = async (inputRef) => {
-    await instance
-      .get(`api/search?keyword=${inputRef.current.value}`)
-      .then((res) =>
-        setLectureData(res.data.data)
-      );
-  };  
+  const getData = (inputRef) => {
+      dispatch(__searchList(inputRef));
+      navigate('/search')
+  };
 
-const onKeyPress = (e)=>{
-    if(e.key == 'Enter'){
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
       getData(inputRef);
     }
   };
-  console.log(lectureData)
+
   return (
     <InputLayout>
       <InputTitle>성장기회의 평등을 추구합니다.</InputTitle>
@@ -33,17 +32,21 @@ const onKeyPress = (e)=>{
         suppressContentEditableWarning={true}
         style={{ padding: "12px" }}
       >
-        <InputSearch placeholder={"배우고 싶은 지식을 입력해보세요."} onKeyPress={onKeyPress} ref={inputRef}/>
+        <InputSearch
+          placeholder={"배우고 싶은 지식을 입력해보세요."}
+          onKeyPress={onKeyPress}
+          ref={inputRef}
+        />
         <SearchOutlined
           style={{
             fontSize: "25px",
             opacity: "0.6",
             cursor: "pointer",
           }}
-        onClick={() => getData(inputRef) } />
+          onClick={() => getData(inputRef)}
+        />
       </DivSearch>
-      {lectureData?null:<Skil/>}
-      <SearchList/>
+      <Skil />
     </InputLayout>
   );
 };
@@ -65,8 +68,7 @@ const InputTitle = styled.p`
   margin: auto;
   font-size: 22px;
   margin-bottom: 7px;
-  color:#363636;
-
+  color: #363636;
 `;
 
 const DivSearch = styled.div`
@@ -97,6 +99,5 @@ const InputSearch = styled.input`
   background-color: rgba(29, 192, 120, 0);
   &:focus {
     outline: none;
-
   }
 `;

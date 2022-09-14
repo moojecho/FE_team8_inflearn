@@ -1,5 +1,5 @@
 import React from "react";
-import LectureList from "./lectureList";
+import LectureTop from "./lectureTop";
 import LectureMiddle from "./lectureMiddle";
 import LectureBottom from "./lectureBottom";
 import styled from "styled-components";
@@ -14,7 +14,7 @@ const LectureLayout = () => {
         </p>
       </ListTitle>
       <Lecture>
-        <LectureList />
+        <LectureTop />
       </Lecture>
 
       <ListTitle>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LecturePage from "./pages/LecturePage";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
+import SearchListPage from "./pages/SearchListPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/lecture" element={<LecturePage />} />
+        <Route path="/search" element={<SearchListPage />} />
       </Routes>
     </DivApp>
   );
