@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import instance from "../../shared/api"
 
 
 const initialState = {
-    data:[]
 };
 
 export const __getLectureList = createAsyncThunk(
     "GET_LECTURE_LIST",
     async (payload, thunkAPI) => {
-      const { data } = await axios.get(
-        `http://3.36.73.181:8080/api/lecture`
+      const { data } = await instance.get(
+        `api/lecture`
       );
       return thunkAPI.fulfillWithValue(data);
     }
