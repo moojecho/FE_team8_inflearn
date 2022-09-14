@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-const ModalBackground = ({ handleLoginScreen }) => {
-  return <Background onClick={handleLoginScreen}></Background>;
+const ModalBackground = ({ handleLoginScreen, zIndex }) => {
+  return <Background onClick={handleLoginScreen} zIndex={zIndex}></Background>;
 };
 
 export default ModalBackground;
@@ -15,5 +15,5 @@ const Background = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(11, 19, 30, 0.37);
-  z-index: 1010;
+  z-index: ${(props) => props.zIndex};
 `;

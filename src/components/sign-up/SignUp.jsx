@@ -113,7 +113,7 @@ const SignUp = () => {
     <>
       {modal ? (
         <>
-          <ModalBackground />
+          <ModalBackground zIndex={1010} />
           <ModalSection>
             <BsExclamationTriangle
               style={{

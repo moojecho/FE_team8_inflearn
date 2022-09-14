@@ -58,7 +58,7 @@ const SignIn = ({ handleLoginScreen }) => {
 
   return (
     <>
-      <ModalBackground handleLoginScreen={handleLoginScreen} />
+      <ModalBackground handleLoginScreen={handleLoginScreen} zIndex={1010} />
       <Section>
         <CloseButton type="button" onClick={handleLoginScreen}>
           <GrClose />

@@ -14,10 +14,6 @@ const CommentForm = ({ onSubmitHandler }) => {
 
   let FillWidth = `${150 * (score / 5)}px`;
 
-  const handleStar = (num) => {
-    setScore(num);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (score === 0 || comment === "") {
@@ -46,7 +42,7 @@ const CommentForm = ({ onSubmitHandler }) => {
     <>
       {modal ? (
         <>
-          <ModalBackground />
+          <ModalBackground zIndex={1010} />
           <ModalSection>
             <BsExclamationTriangle
               style={{
@@ -74,7 +70,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(1)}
+                onClick={() => setScore(1)}
               />
               <AiFillStar
                 style={{
@@ -82,7 +78,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(2)}
+                onClick={() => setScore(2)}
               />
               <AiFillStar
                 style={{
@@ -90,7 +86,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(3)}
+                onClick={() => setScore(3)}
               />
               <AiFillStar
                 style={{
@@ -98,7 +94,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(4)}
+                onClick={() => setScore(4)}
               />
               <AiFillStar
                 style={{
@@ -106,7 +102,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(5)}
+                onClick={() => setScore(5)}
               />
             </div>
             <FillStar width={FillWidth}>
@@ -116,7 +112,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(1)}
+                onClick={() => setScore(1)}
               />
               <AiFillStar
                 style={{
@@ -124,7 +120,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(2)}
+                onClick={() => setScore(2)}
               />
               <AiFillStar
                 style={{
@@ -132,7 +128,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(3)}
+                onClick={() => setScore(3)}
               />
               <AiFillStar
                 style={{
@@ -140,7 +136,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(4)}
+                onClick={() => setScore(4)}
               />
               <AiFillStar
                 style={{
@@ -148,7 +144,7 @@ const CommentForm = ({ onSubmitHandler }) => {
                   width: "30px",
                   height: "30px",
                 }}
-                onClick={() => handleStar(5)}
+                onClick={() => setScore(5)}
               />
             </FillStar>
           </Star>
