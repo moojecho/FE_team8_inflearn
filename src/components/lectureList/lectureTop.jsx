@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import ForHover from "./forHover"
+
 import {__getLectureList} from "../../redux/modules/lectureSlice"
 
 import styled from "styled-components";
@@ -39,41 +41,7 @@ const Tab = () => {
   return (
     <DivTab>
       <Slider {...settings}>
-        {lectureData.map((list) => (
-          <LectureCard key={list.id} >
-            <LectureImg src={list.frontLectureImg} />
-            <LectureTitle>{list.frontLectureTitle}</LectureTitle>
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#808080",
-                marginTop: "30px",
-                marginLeft: "2px",
-                zIndex:"-5",position:"relative"
-              }}
-            >
-              {list.frontInstructor}
-            </p>
-            <p style={{ marginLeft: "3px" }}>{list.star}</p>
-            <div
-              style={{
-                fontSize: "18px",
-                fontWeight: "bold",
-                color: "#2565AE",
-                marginLeft: "2px",
-                display: "flex",
-                flexDirection: "row",
-              }}
-            >
-              {list.frontOriginPrice == "무료" ? (
-                list.frontOriginPrice
-              ) : (
-                <OriginPrice>{list.frontOriginPrice}</OriginPrice>
-              )}
-              <p style={{zIndex:"-5",position:"relative"}}>{list.frontDiscountPrice}</p>
-            </div>
-          </LectureCard>
-        ))}
+        {lectureData.map((list) => <ForHover list={list}/> )}
       </Slider>
     </DivTab>
   );
@@ -110,45 +78,4 @@ const DivTab = styled.div`
     color: gray;
     font-size: 50px;
   }
-`;
-
-const LectureCard = styled.div`
-  margin-right:10px;
-  cursor:pointer;
-
-  &:hover {
-    width: 225px;
-    height: 300px;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: black;
-    font-size: 13px;
-  }
-`;
-
-const LectureImg = styled.img`
-  width: 240px;
-  height: 157px;
-  margin: auto;
-  z-index: -5;
-  position: relative;
-`;
-
-const LectureTitle = styled.p`
-  height: 45px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #454545;
-  margin-top: 10px;
-  white-space: no-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const OriginPrice = styled.p`
-  color: #595959;
-  font-weight: 500;
-  font-size: 0.9rem;
-  opacity: 0.75;
-  margin: 3px;
-  text-decoration: line-through;
 `;

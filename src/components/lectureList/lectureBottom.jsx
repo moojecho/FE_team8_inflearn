@@ -48,7 +48,7 @@ const LectureBottom = () => {
   );
 };
 
-
+export default LectureBottom;
 
 const Pre = styled.div`
   width: 30px;
@@ -106,14 +106,3 @@ height: 45px;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
-const OriginPrice = styled.p`
-  color: #595959;
-  font-weight: 500;
-  font-size: 0.9rem;
-  opacity: 0.75;
-  margin: 3px;
-  text-decoration: line-through;
-`;
-
-export default LectureBottom;
