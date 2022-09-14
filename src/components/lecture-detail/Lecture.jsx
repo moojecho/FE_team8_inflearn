@@ -5,20 +5,25 @@ import { FaCrown } from "react-icons/fa";
 import { HiHashtag } from "react-icons/hi";
 import Star from "./Star";
 
-const Lecture = ({ commentCount, entireScore }) => {
+const Lecture = ({
+  commentCount,
+  entireScore,
+  lectureImg,
+  title,
+  instructor,
+  level,
+  skill,
+}) => {
   return (
     <Section>
       <LectureHeader>
         <LectureContainer>
           <ThumbnailContainer>
-            <Thunbnail
-              src="https://cdn.inflearn.com/public/courses/326905/cover/739f7b4b-1a9f-478f-a6a8-1a13bf58cae3/326905-eng.png"
-              alt="thumbnail"
-            />
+            <Thunbnail src={lectureImg} alt="thumbnail" />
           </ThumbnailContainer>
           <LectureDiscription>
             <BreadCrumb>개발·프로그래밍 프론트엔드</BreadCrumb>
-            <Title>만들고 비교하며 학습하는 리액트 (React)</Title>
+            <Title>{title}</Title>
             <Info>
               <InfoStarBox>
                 <Star
@@ -38,7 +43,7 @@ const Lecture = ({ commentCount, entireScore }) => {
               <BsPerson
                 style={{ width: "16px", height: "16px", color: "#fff" }}
               />
-              <InstructorName>강사명</InstructorName>
+              <InstructorName>{instructor}</InstructorName>
               <FaCrown
                 style={{ width: "16px", height: "16px", color: "#fff" }}
               />
