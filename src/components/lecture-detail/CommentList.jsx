@@ -4,53 +4,98 @@ import Star from "./Star";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
-const CommentList = ({ nickname, comments, onSubmitHandler }) => {
+const CommentList = ({
+  nickname,
+  comments,
+  onSubmitHandler,
+  commentCount,
+  entireScore,
+  onEditHandler,
+}) => {
+  const five = Array.from(comments).filter(
+    (comment) => comment.star === 5
+  ).length;
+  const four = Array.from(comments).filter(
+    (comment) => comment.star === 4
+  ).length;
+  const three = Array.from(comments).filter(
+    (comment) => comment.star === 3
+  ).length;
+  const two = Array.from(comments).filter(
+    (comment) => comment.star === 2
+  ).length;
+  const one = Array.from(comments).filter(
+    (comment) => comment.star === 1
+  ).length;
+
+  const max = Math.max(five, four, three, two, one);
+
   return (
     <CommentBox>
       <Header>
         <HeaderTitle>수강평</HeaderTitle>
-        <HeaderSubTitle>총 66개</HeaderSubTitle>
+        <HeaderSubTitle>총 {commentCount}개</HeaderSubTitle>
       </Header>
       <DashBoard>
         <DashBoardStar>
-          <DashBoardStarNum>4.8</DashBoardStarNum>
-          <Star width={"20px"} height={"20px"} boxWidth={100} score={4.8} />
-          <DashBoardStarText>66개의 수강평</DashBoardStarText>
+          <DashBoardStarNum>{entireScore}</DashBoardStarNum>
+          <Star
+            width={"20px"}
+            height={"20px"}
+            boxWidth={100}
+            score={entireScore}
+          />
+          <DashBoardStarText>{commentCount}개의 수강평</DashBoardStarText>
         </DashBoardStar>
         <DashBoardGraph>
           <DashBoardGraphBox>
             <DashBoardGraphScore>5점</DashBoardGraphScore>
             <DashBoardGraphBar>
               <GraphBarBackground />
-              <GraphBarValue />
+              <GraphBarValue
+                width={`${360 * (five / commentCount)}px`}
+                backgrounColor={five === max ? "rgb(255, 200, 7)" : "#8c9797"}
+              />
             </DashBoardGraphBar>
           </DashBoardGraphBox>
           <DashBoardGraphBox>
             <DashBoardGraphScore>4점</DashBoardGraphScore>
             <DashBoardGraphBar>
               <GraphBarBackground />
-              <GraphBarValue />
+              <GraphBarValue
+                width={`${360 * (four / commentCount)}px`}
+                backgrounColor={four === max ? "rgb(255, 200, 7)" : "#8c9797"}
+              />
             </DashBoardGraphBar>
           </DashBoardGraphBox>
           <DashBoardGraphBox>
             <DashBoardGraphScore>3점</DashBoardGraphScore>
             <DashBoardGraphBar>
               <GraphBarBackground />
-              <GraphBarValue />
+              <GraphBarValue
+                width={`${360 * (three / commentCount)}px`}
+                backgrounColor={three === max ? "rgb(255, 200, 7)" : "#8c9797"}
+              />
             </DashBoardGraphBar>
           </DashBoardGraphBox>
           <DashBoardGraphBox>
             <DashBoardGraphScore>2점</DashBoardGraphScore>
             <DashBoardGraphBar>
               <GraphBarBackground />
-              <GraphBarValue />
+              <GraphBarValue
+                width={`${360 * (two / commentCount)}px`}
+                backgrounColor={two === max ? "rgb(255, 200, 7)" : "#8c9797"}
+              />
             </DashBoardGraphBar>
           </DashBoardGraphBox>
           <DashBoardGraphBox>
             <DashBoardGraphScore>1점</DashBoardGraphScore>
             <DashBoardGraphBar>
               <GraphBarBackground />
-              <GraphBarValue />
+              <GraphBarValue
+                width={`${360 * (one / commentCount)}px`}
+                backgrounColor={one === max ? "rgb(255, 200, 7)" : "#8c9797"}
+              />
             </DashBoardGraphBar>
           </DashBoardGraphBox>
         </DashBoardGraph>
@@ -58,7 +103,11 @@ const CommentList = ({ nickname, comments, onSubmitHandler }) => {
       <ReviewList>
         {nickname ? <CommentForm onSubmitHandler={onSubmitHandler} /> : null}
         {comments?.map((comment) => (
-          <Comment {...comment} key={comment.id} />
+          <Comment
+            {...comment}
+            key={comment.id}
+            onEditHandler={onEditHandler}
+          />
         ))}
       </ReviewList>
     </CommentBox>
@@ -162,10 +211,10 @@ const GraphBarBackground = styled.div`
 `;
 
 const GraphBarValue = styled.div`
-  width: calc(360px * (56 / 66));
+  width: ${(props) => props.width};
   height: 10px;
   border-radius: 5px;
-  background-color: rgb(255, 200, 7);
+  background-color: ${(props) => props.backgrounColor};
   position: absolute;
 `;
 
