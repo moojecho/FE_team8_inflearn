@@ -9,19 +9,21 @@ import styled from "styled-components";
 
 const LectureMiddle = () => {
   const [lectureData, setLectureData] = useState([]);
+  const [hovering, setHovering] = useState('')
 
   useEffect(() => {
     const getData = async () => {
       await instance
         .get(`api/lecture`)
         .then((res) =>
-          setLectureData(res.data.filter((list) => list.backLevel == "초급"))
+          setLectureData(res.data.filter((list) => list.backLevel == "초급").slice(0,15))
         );
     };
 
     getData();
   }, []);
 
+  console.log(lectureData)
   const settings = {
     infinite: true,
     speed: 500,
@@ -37,8 +39,8 @@ const LectureMiddle = () => {
   return (
     <DivTab>
       <Slider {...settings}>
-        {lectureData.map((list) => (
-          <LectureCard key={list.id}>
+        {lectureData.map((list) => hovering==''?
+          <LectureCard onMouseOver={()=> setHovering('0.3')} onMouseOut={()=>setHovering('')} style={{opacity:`${hovering}`}} key={list.id}>
             <LectureImg  src={list.frontLectureImg} />
             <LectureTitle>{list.frontLectureTitle}</LectureTitle>
             <p
@@ -70,11 +72,20 @@ const LectureMiddle = () => {
               {list.frontDiscountPrice}
             </div>
           </LectureCard>
-        ))}
+         :
+        
+          <LectureBehindCard  onMouseOut={()=>setHovering('')} key={list.id}>
+           <LectureBehindTitle>{list.frontLectureTitle}</LectureBehindTitle>
+              <LecureBehindDes>📊{list.backLevel}</LecureBehindDes>
+              <LecureBehindDes>📘{list.backSkill}</LecureBehindDes>
+          </LectureBehindCard>
+        )}
+        
       </Slider>
     </DivTab>
   );
 };
+export default LectureMiddle;
 
 const Pre = styled.div`
   width: 30px;
@@ -94,7 +105,6 @@ const NextTo = styled.div`
 
 const DivTab = styled.div`
   width: 100%;
-  height: 384px;
 
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
@@ -109,28 +119,55 @@ const DivTab = styled.div`
 `;
 
 const LectureCard = styled.div`
-  height: 285px;
-  margin: auto;
   cursor:pointer;
+  
+
+  &:hover {
+    width: 225px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: black;
+    font-size: 13px;
+  }
+`;
+
+const LectureBehindCard = styled.div`
+max-width:240px;
+    width: 240px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.8);
 `;
 
 const LectureImg = styled.img`
-  width: 232px;
+  width: 240px;
   height: 157px;
+  margin: auto;
+  z-index: -5;
+  position: relative;
 `;
 
 const LectureTitle = styled.p`
-height: 45px;
-font-size: 15px;
-font-weight: bold;
-color: #454545;
-margin-top: 10px;
-white-space: no-wrap;
-overflow: hidden;
-text-overflow: ellipsis;
+  height: 45px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #454545;
+  margin-top: 10px;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
- const OriginPrice = styled.p`
+const LectureBehindTitle = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  white-space: no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding:10px;
+`;
+
+const OriginPrice = styled.p`
   color: #595959;
   font-weight: 500;
   font-size: 0.9rem;
@@ -138,4 +175,8 @@ text-overflow: ellipsis;
   margin: 3px;
   text-decoration: line-through;
 `;
-export default LectureMiddle;
+
+const LecureBehindDes = styled.p`
+color:skyblue;
+margin-left:6px;
+`;

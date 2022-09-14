@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import {__getLectureList} from "../../redux/modules/lectureSlice"
+
 import styled from "styled-components";
 
 const Tab = () => {
@@ -47,6 +49,7 @@ const Tab = () => {
                 color: "#808080",
                 marginTop: "30px",
                 marginLeft: "2px",
+                zIndex:"-5",position:"relative"
               }}
             >
               {list.frontInstructor}
@@ -67,7 +70,7 @@ const Tab = () => {
               ) : (
                 <OriginPrice>{list.frontOriginPrice}</OriginPrice>
               )}
-              {list.frontDiscountPrice}
+              <p style={{zIndex:"-5",position:"relative"}}>{list.frontDiscountPrice}</p>
             </div>
           </LectureCard>
         ))}
@@ -110,18 +113,15 @@ const DivTab = styled.div`
 `;
 
 const LectureCard = styled.div`
+  margin-right:10px;
   cursor:pointer;
 
   &:hover {
-    width: 250px;
-    display: none;
-    position: absolute;
-    top: 0;
+    width: 225px;
     height: 300px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.1);
     color: black;
     font-size: 13px;
-    padding: 8px;
   }
 `;
 
@@ -129,7 +129,8 @@ const LectureImg = styled.img`
   width: 240px;
   height: 157px;
   margin: auto;
-  z-index: 2;
+  z-index: -5;
+  position: relative;
 `;
 
 const LectureTitle = styled.p`

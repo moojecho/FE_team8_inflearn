@@ -14,44 +14,60 @@ const SearchList = () => {
   console.log(lectures);
   return (
     <ListLayout>
-      <p style={{ fontSize: "18px", color: "#454545",fontWeight:"bold", margin: "10px" }}>전체</p>
+      <p
+        style={{
+          fontSize: "18px",
+          color: "#454545",
+          fontWeight: "bold",
+          margin: "10px",
+        }}
+      >
+        전체
+      </p>
       <ResultLayout>
-        {lectures
-          ? lectures.map((list) => (
-              <LectureCard key={list.id}>
-                <LectureImg src={list.lectureImg} />
-                <LectureTitle>{list.title}</LectureTitle>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "#808080",
-                    marginTop: "30px",
-                    marginLeft: "2px",
-                  }}
-                >
-                  {list.instructor}
-                </p>
-                <p style={{ marginLeft: "3px" }}>{list.star}</p>
-                <div
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    color: "#2565AE",
-                    marginLeft: "2px",
-                    display: "flex",
-                    flexDirection: "row",
-                  }}
-                >
-                  {list.originPrice == "무료" ? (
-                    list.originPrice
-                  ) : (
-                    <OriginPrice>{list.originPrice}</OriginPrice>
-                  )}
+        {lectures ? (
+          lectures.map((list) => (
+            <LectureCard key={list.id}>
+              <LectureImg src={list.lectureImg} />
+              <LectureTitle>{list.title}</LectureTitle>
+              <p
+                style={{
+                  fontSize: "14px",
+                  color: "#808080",
+                  marginTop: "30px",
+                  marginLeft: "2px",
+                  zIndex: "-5",
+                  position: "relative",
+                }}
+              >
+                {list.instructor}
+              </p>
+              <div
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#2565AE",
+                  marginLeft: "2px",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                {list.originPrice == "무료" ? (
+                  list.originPrice
+                ) : (
+                  <OriginPrice>{list.originPrice}</OriginPrice>
+                )}
+                <p style={{ zIndex: "-5", position: "relative" }}>
                   {list.discountPrice}
-                </div>
-              </LectureCard>
-            ))
-          : <NoneResult style={{marginTop:"15px" ,color:"gray"}}>검색 결과를 불러오지 못했어요..😭</NoneResult>}
+                </p>
+              </div>
+            </LectureCard>
+          ))
+        ) : (
+          <NoneResult style={{ marginTop: "15px", color: "gray" }}>
+            검색 결과를 불러오지 못했어요..😭
+          </NoneResult>
+        )}
       </ResultLayout>
     </ListLayout>
   );
@@ -69,36 +85,34 @@ const ListLayout = styled.div`
 const ResultLayout = styled.div`
   max-width: 990px;
   min-width: 500px;
-  min-height:555px;
+  min-height: 555px;
   display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-  border-Top: 1px solid #e4e4e4;
-  margin-left:10px;
+  border-top: 1px solid #e4e4e4;
+  margin-left: 10px;
 `;
 
 const NoneResult = styled.p`
-font-size:30px;
-display:flex;
-justify-content:start;
+  font-size: 30px;
+  display: flex;
+  justify-content: start;
 `;
 
 const LectureCard = styled.div`
-  width: 240px;
-  height: 330px;
+  width: 225px;
+  height: 300px;
   cursor: pointer;
+  margin-right: 15px;
+  margin-top: 15px;
 
   &:hover {
-    width: 250px;
-    display: none;
-    position: absolute;
-    top: 0;
+    width: 225px;
     height: 300px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.1);
     color: black;
     font-size: 13px;
-    padding: 8px;
   }
 `;
 
@@ -106,7 +120,8 @@ const LectureImg = styled.img`
   width: 225px;
   height: 145px;
   margin: auto;
-  z-index: 2;
+  position: relative;
+  z-index: -5;
 `;
 
 const LectureTitle = styled.p`
