@@ -4,6 +4,7 @@ import LecturePage from "./pages/LecturePage";
 import MainPage from "./pages/MainPage";
 import SignUp from "./pages/SignUpPage";
 import SearchListPage from "./pages/SearchListPage";
+import KaKao from "./components/sign-in/KaKao";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/lecture/:id" element={<LecturePage />} />
         <Route path="/search" element={<SearchListPage />} />
+        <Route path="/oauth/callback/kakao" element={<KaKao />} />
       </Routes>
     </DivApp>
   );
