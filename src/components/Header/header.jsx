@@ -90,11 +90,12 @@ const HeaderLayout = styled.div`
 `;
 
 const Button = styled.div`
+width:200px;
   display: flex;
   height: 35px;
   margin: auto;
   margin-top: 9px;
-  margin-right: 33px;
+  margin-right: -5px;
   padding: 6px;
   border-radius: 4px;
 `;
@@ -102,10 +103,10 @@ const Button = styled.div`
 const LoginButton = styled.div`
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
-  width: 75px;
+  width: 60px;
   height: 35px;
   margin: auto 8px auto;
-  padding-top: 5px;
+  padding-top: 3px;
   color: #363636;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
@@ -119,6 +120,7 @@ const SignUpLogoutButton = styled.div`
   height: 35px;
   font-size: 15px;
   margin: auto;
+  margin-right:35px;
   text-align: center;
   padding-top: 5px;
   border: 1px solid #dbdbdb;

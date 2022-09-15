@@ -94,7 +94,7 @@ const DivSearch = styled.div`
 const InputSearch = styled.input`
   width: 540px;
   height: 30px;
-  font-size: 17px;
+  font-size: 16px;
   border: none;
   background-color: rgba(29, 192, 120, 0);
   &:focus {

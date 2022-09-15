@@ -14,7 +14,6 @@ const SearchList = () => {
     setLectures(lectureList);
   }, [lectureList]);
 
-  console.log(lectures);
   return (
     <ListLayout>
       <p
@@ -28,8 +27,8 @@ const SearchList = () => {
         전체
       </p>
       <ResultLayout>
-        {lectures ? 
-          lectures.map((list) => <LectureItem list={list}/>
+        {lectures && lectures!=[] ? 
+          lectures.map((list) => <LectureItem list={list} />
           )
          : 
           <NoneResult style={{ marginTop: "15px", color: "gray" }}>

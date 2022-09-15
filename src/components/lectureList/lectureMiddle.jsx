@@ -26,9 +26,7 @@ const LectureMiddle = () => {
     getData();
   }, []);
 
-  console.log(lectureData);
   const settings = {
-    infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -43,7 +41,7 @@ const LectureMiddle = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <ForHover list={list} />
+          <ForHover key={list.id} list={list} />
         ))}
       </Slider>
     </DivTab>
