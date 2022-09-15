@@ -5,9 +5,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import ForHover from "./forHover"
+import ForHover from "./forHover";
 
-import {__getLectureList} from "../../redux/modules/lectureSlice"
+import { __getLectureList } from "../../redux/modules/lectureSlice";
 
 import styled from "styled-components";
 
@@ -41,7 +41,9 @@ const Tab = () => {
   return (
     <DivTab>
       <Slider {...settings}>
-        {lectureData.map((list) => <ForHover list={list}/> )}
+        {lectureData.map((list) => (
+          <ForHover list={list} />
+        ))}
       </Slider>
     </DivTab>
   );

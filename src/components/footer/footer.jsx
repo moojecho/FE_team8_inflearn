@@ -17,6 +17,8 @@ const Footer = () => {
         <FootText>이노베이션캠프(주)</FootText>
         <Wall/>
         <FootText>팀장: 이다정</FootText>
+        <Wall/>
+        <FootText>팀원: 박세진,이소현,박세은,조무제</FootText>
         </BottomText>
         <FootText style={{marginLeft:"83px"}}>주소: 게더타운 8조 테이블</FootText>
       </InsideLayout>
@@ -69,7 +71,7 @@ font-size: 12px;
 `;
 
 const BottomText = styled.div`
-width:300px;
+width:500px;
 display:flex;
 flex-direction:row;
 margin-top:10px;

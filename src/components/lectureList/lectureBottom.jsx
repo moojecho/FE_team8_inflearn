@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import instance from "../../shared/api";
+import { useNavigate } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,13 +9,18 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 
 const LectureBottom = () => {
+  const navigate = useNavigate();
   const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       await instance
         .get(`/api/lecture`)
-        .then((res) => setLectureData(res.data.filter((list)=>list.backLevel=="중급이상").slice(0,3)));
+        .then((res) =>
+          setLectureData(
+            res.data.filter((list) => list.backLevel == "중급이상").slice(0, 3)
+          )
+        );
     };
 
     getData();
@@ -36,11 +42,12 @@ const LectureBottom = () => {
     <DivTab>
       <Slider {...settings}>
         {lectureData.map((list) => (
-          <LectureCard key={list.id}>
-            <LectureImg 
-              src={list.frontLectureImg}
-            ></LectureImg>
-            <LectureTitle >{list.frontLectureTitle}</LectureTitle>
+          <LectureCard
+            onClick={() => navigate(`/lecture/${list.id}`)}
+            key={list.id}
+          >
+            <LectureImg src={list.frontLectureImg}></LectureImg>
+            <LectureTitle>{list.frontLectureTitle}</LectureTitle>
           </LectureCard>
         ))}
       </Slider>
@@ -73,33 +80,32 @@ const DivTab = styled.div`
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
     color: gray; // 버튼 색은 검은색으로
-   font-size:50px;
+    font-size: 50px;
   }
   .slick-next:before {
     opacity: 1;
     color: gray;
-    font-size:50px;
+    font-size: 50px;
   }
-  
 `;
 
 const LectureCard = styled.div`
   height: 285px;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 const LectureImg = styled.img`
   width: 300px;
   height: 157px;
-  margin:auto;
-  display:flex;
-  justify-content:center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 `;
 
 const LectureTitle = styled.p`
-width:250px;
-margin:auto;
-height: 45px;
+  width: 250px;
+  margin: auto;
+  height: 45px;
   font-size: 15px;
   font-weight: bold;
   margin-top: 10px;

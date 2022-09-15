@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import ForHover from "./forHover"
+import ForHover from "./forHover";
 
 import styled from "styled-components";
 
@@ -17,14 +17,16 @@ const LectureMiddle = () => {
       await instance
         .get(`api/lecture`)
         .then((res) =>
-          setLectureData(res.data.filter((list) => list.backLevel == "초급").slice(0,15))
+          setLectureData(
+            res.data.filter((list) => list.backLevel == "초급").slice(0, 15)
+          )
         );
     };
 
     getData();
   }, []);
 
-  console.log(lectureData)
+  console.log(lectureData);
   const settings = {
     infinite: true,
     speed: 500,
@@ -40,8 +42,9 @@ const LectureMiddle = () => {
   return (
     <DivTab>
       <Slider {...settings}>
-        {lectureData.map((list) => <ForHover list={list}/> )}
-        
+        {lectureData.map((list) => (
+          <ForHover list={list} />
+        ))}
       </Slider>
     </DivTab>
   );

@@ -52,7 +52,7 @@ const LectureLay = styled.div`
 const ListTitle = styled.div`
   font-size: 23px;
   font-weight: bold;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 `;
 
 const Lecture = styled.div`
