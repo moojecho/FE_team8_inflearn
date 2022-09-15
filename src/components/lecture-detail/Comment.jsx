@@ -15,6 +15,7 @@ const Comment = ({
   content,
   nickname,
   star,
+  createdAt,
   onEditHandler,
   onDeleteHandler,
 }) => {
@@ -287,7 +288,9 @@ const Comment = ({
           ) : null}
         </ReviewHeader>
         <ReviewBody>{content}</ReviewBody>
-        <ReviewDate>2022-09-12</ReviewDate>
+        <ReviewDate>
+          {createdAt[0]}-{createdAt[1]}-{createdAt[2]}
+        </ReviewDate>
       </Review>
     </>
   );
