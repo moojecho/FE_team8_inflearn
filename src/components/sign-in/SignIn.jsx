@@ -6,6 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { setCookie } from "../../shared/cookie";
 import { useNavigate } from "react-router-dom";
+import { KAKAO_AUTH_URL } from "../../OAuth";
 
 const SignIn = ({ handleLoginScreen }) => {
   const navigate = useNavigate();
@@ -98,6 +99,11 @@ const SignIn = ({ handleLoginScreen }) => {
             </Toggle>
           </SignInInputBox>
           <SignInButton>로그인</SignInButton>
+          <Kakao>
+            <KaKaoSignInButton href={KAKAO_AUTH_URL}>
+              카카오로 로그인하기
+            </KaKaoSignInButton>
+          </Kakao>
         </form>
         <SingUpButton onClick={moveToSignUpPage}>회원가입</SingUpButton>
       </Section>
@@ -109,7 +115,7 @@ export default SignIn;
 
 const Section = styled.section`
   width: 360px;
-  height: 330px;
+  height: 400px;
   padding: 24px;
   margin: auto;
   border-radius: 6px;
@@ -183,6 +189,29 @@ const SignInButton = styled.button`
   border: 0;
   border-radius: 4px;
   color: #fff;
+  font-size: 14px;
+  letter-spacing: -1px;
+  font-weight: 700;
+  line-height: 1.43;
+  cursor: pointer;
+`;
+
+const Kakao = styled.div`
+  width: 320px;
+  height: 48px;
+  margin-top: 16px;
+  background-color: #fbe404;
+  border: 0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const KaKaoSignInButton = styled.a`
+  font-family: "Noto Sans KR", sans-serif;
+  text-decoration: none;
+  color: #3b1b1b;
   font-size: 14px;
   letter-spacing: -1px;
   font-weight: 700;
