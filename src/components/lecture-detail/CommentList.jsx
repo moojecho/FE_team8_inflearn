@@ -12,6 +12,7 @@ const CommentList = ({
   entireScore,
   onEditHandler,
   onDeleteHandler,
+  lectureId,
 }) => {
   const five = Array.from(comments).filter(
     (comment) => comment.star === 5
@@ -102,7 +103,12 @@ const CommentList = ({
         </DashBoardGraph>
       </DashBoard>
       <ReviewList>
-        {nickname ? <CommentForm onSubmitHandler={onSubmitHandler} /> : null}
+        {nickname ? (
+          <CommentForm
+            onSubmitHandler={onSubmitHandler}
+            lectureId={lectureId}
+          />
+        ) : null}
         {comments?.map((comment) => (
           <Comment
             {...comment}
