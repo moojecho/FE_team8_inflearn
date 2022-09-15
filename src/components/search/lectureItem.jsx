@@ -99,10 +99,10 @@ const OriginPrice = styled.p`
 `;
 
 const LectureBehindCard = styled.div`
-  max-width: 235px;
-  width: 235px;
+  max-width: 230px;
+  width: 230px;
   height: 300px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 const LectureBehindTitle = styled.p`
