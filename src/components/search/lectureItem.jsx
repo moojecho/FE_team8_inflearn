@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import __searchList from "../../redux/modules/lectureSlice";
 
-const LectureItem = ({list}) => {
+const LectureItem = ({ list }) => {
+  const navigate = useNavigate();
 
-  const [hovering, setHovering] = useState('')
-  
-  return (
-    hovering==''?
-    <LectureCard onMouseOver={()=> setHovering('0.3')} onMouseOut={()=>setHovering('')} key={list.id}>
+  const [hovering, setHovering] = useState("");
+
+  return hovering == "" ? (
+    <LectureCard
+      onMouseOver={() => setHovering("0.3")}
+      onMouseOut={() => setHovering("")}
+      key={list.id}
+    >
       <LectureImg src={list.lectureImg} />
       <LectureTitle>{list.title}</LectureTitle>
       <p
@@ -43,12 +48,17 @@ const LectureItem = ({list}) => {
           {list.discountPrice}
         </p>
       </div>
-    </LectureCard> : <LectureBehindCard  onMouseOut={()=>setHovering('')} key={list.id}>
-   <LectureBehindTitle>{list.title}</LectureBehindTitle>
+    </LectureCard>
+  ) : (
+    <LectureBehindCard
+      onClick={() => navigate(`/lecture/${list.id}`)}
+      onMouseOut={() => setHovering("")}
+      key={list.id}
+    >
+      <LectureBehindTitle>{list.title}</LectureBehindTitle>
       <LecureBehindDes>📊{list.level}</LecureBehindDes>
-      <LecureBehindDes>📘{list.skill
-}</LecureBehindDes>
-  </LectureBehindCard>
+      <LecureBehindDes>📘{list.skill}</LecureBehindDes>
+    </LectureBehindCard>
   );
 };
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import styled from "styled-components";
 
 import __searchList from "../../redux/modules/lectureSlice";
 
 const ForHover = ({list}) => {
-
+  const navigate = useNavigate();
   const [hovering, setHovering] = useState('')
   
   return (
@@ -43,7 +44,7 @@ const ForHover = ({list}) => {
           {list.frontDiscountPrice}
         </p>
       </div>
-    </LectureCard> : <LectureBehindCard  onMouseOut={()=>setHovering('')} key={list.id}>
+    </LectureCard> : <LectureBehindCard onClick={()=>navigate(`/lecture/${list.id}`)} onMouseOut={()=>setHovering('')} key={list.id}>
    <LectureBehindTitle>{list.frontLectureTitle}</LectureBehindTitle>
       <LecureBehindDes>📊{list.backLevel}</LecureBehindDes>
       <LecureBehindDes>📘{list.backSkill
@@ -102,6 +103,7 @@ const LectureBehindCard = styled.div`
   max-width: 235px;
   width: 235px;
   height: 300px;
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.8);
 `;
 

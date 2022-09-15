@@ -28,7 +28,7 @@ const TabTopContent = styled.div`
   border-bottom: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-left: 1px solid #e4e4e4;
-  border-Top: 1px solid #e4e4e4;
+  border-top: 1px solid #e4e4e4;
   padding: 15px;
   font-size: 16px;
   color: #595959;
