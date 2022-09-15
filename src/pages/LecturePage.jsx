@@ -140,6 +140,7 @@ const LecturePage = () => {
         entireScore={entireScore}
         onEditHandler={onEditHandler}
         onDeleteHandler={onDeleteHandler}
+        lectureId={lecture.id}
       />
     </>
   );
