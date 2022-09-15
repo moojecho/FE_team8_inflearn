@@ -47,7 +47,9 @@ const SignIn = ({ handleLoginScreen }) => {
         setCookie("refreshToken", refreshToken, {
           path: "/",
         });
-        setCookie("nickname", response.data.data.nickname);
+        setCookie("nickname", response.data.data.nickname, {
+          path: "/",
+        });
         window.location.reload();
         handleLoginScreen();
       }

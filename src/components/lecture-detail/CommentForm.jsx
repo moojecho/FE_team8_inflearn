@@ -4,7 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 import { BsExclamationTriangle } from "react-icons/bs";
 import ModalBackground from "../modal/ModalBackground";
 
-const CommentForm = ({ onSubmitHandler }) => {
+const CommentForm = ({ onSubmitHandler, lectureId }) => {
   const [score, setScore] = useState(0);
   const [modal, setModal] = useState(false);
   const [comment, setComment] = useState("");
@@ -28,7 +28,7 @@ const CommentForm = ({ onSubmitHandler }) => {
       return;
     }
     const review = {
-      lectureId: 1,
+      lectureId,
       content: comment,
       star: score,
     };
