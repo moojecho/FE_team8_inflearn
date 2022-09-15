@@ -27,7 +27,6 @@ const LectureBottom = () => {
   }, []);
 
   const settings = {
-    infinite: true,
     speed: 500,
     slidesToShow: lectureData.length,
     slidesToScroll: lectureData.length,
@@ -92,6 +91,7 @@ const DivTab = styled.div`
 const LectureCard = styled.div`
   height: 285px;
   cursor: pointer;
+  width: 100%;
 `;
 
 const LectureImg = styled.img`

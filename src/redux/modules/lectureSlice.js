@@ -20,7 +20,6 @@ export const __searchList = createAsyncThunk(
   async (payload, thunkAPI) =>
 {
   const data = await instance.get(`api/search?keyword=${payload.current.value}`);
-  console.log(data.data)
   return thunkAPI.fulfillWithValue(data.data.data);
 }
 );
@@ -34,7 +33,6 @@ extraReducers:{
         state.lecture = action.payload;
       },
       [__searchList.fulfilled]: (state, action) => {
-        console.log(action.payload)
         state.lecture = action.payload;
       },
 },

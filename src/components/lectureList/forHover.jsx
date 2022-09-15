@@ -80,6 +80,7 @@ const LectureImg = styled.img`
 `;
 
 const LectureTitle = styled.p`
+width:100%;
   height: 45px;
   font-size: 15px;
   font-weight: bold;
@@ -91,6 +92,7 @@ const LectureTitle = styled.p`
 `;
 
 const OriginPrice = styled.p`
+width:60px;
   color: #595959;
   font-weight: 500;
   font-size: 0.9rem;
@@ -108,6 +110,7 @@ const LectureBehindCard = styled.div`
 `;
 
 const LectureBehindTitle = styled.p`
+width:100%;
   font-size: 15px;
   font-weight: bold;
   color: white;
@@ -118,6 +121,7 @@ const LectureBehindTitle = styled.p`
 `;
 
 const LecureBehindDes = styled.p`
+width:100%;
   color: skyblue;
   margin-left: 6px;
 `;
