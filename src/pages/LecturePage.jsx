@@ -12,7 +12,7 @@ const LecturePage = () => {
   const nickname = getCookie("nickname");
   const param = useParams();
 
-  const getlecture = async () => {
+  const getLecture = async () => {
     const { data } = await axios.get(
       process.env.REACT_APP_URL + "/api/lecture/" + param.id
     );
@@ -120,7 +120,7 @@ const LecturePage = () => {
 
   useEffect(() => {
     getComments();
-    getlecture();
+    getLecture();
   }, []);
 
   return (
