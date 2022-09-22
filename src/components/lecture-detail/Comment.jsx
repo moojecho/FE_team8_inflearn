@@ -75,6 +75,28 @@ const Comment = ({
     setNewContent(content);
   }, [content, star]);
 
+  const sliverStar = [1, 2, 3, 4, 5].map((ele) => {
+    <AiFillStar
+      style={{
+        color: "rgb(222, 226, 230)",
+        width: "46px",
+        height: "44px",
+      }}
+      onClick={() => setNewScore(ele)}
+    />;
+  });
+
+  const goldStar = [1, 2, 3, 4, 5].map((ele) => {
+    <AiFillStar
+      style={{
+        color: "rgb(255, 200, 7)",
+        width: "46px",
+        height: "44px",
+      }}
+      onClick={() => setNewScore(ele)}
+    />;
+  });
+
   return (
     <>
       {deleteModal ? (
@@ -134,90 +156,8 @@ const Comment = ({
             </CloseButton>
             <ModalTitle>힘이 되는 수강평을 남겨주세요!</ModalTitle>
             <EditStarBox>
-              <div>
-                <AiFillStar
-                  style={{
-                    color: "rgb(222, 226, 230)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(1)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(222, 226, 230)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(2)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(222, 226, 230)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(3)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(222, 226, 230)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(4)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(222, 226, 230)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(5)}
-                />
-              </div>
-              <FillStar width={FillWidth}>
-                <AiFillStar
-                  style={{
-                    color: "rgb(255, 200, 7)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(1)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(255, 200, 7)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(2)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(255, 200, 7)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(3)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(255, 200, 7)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(4)}
-                />
-                <AiFillStar
-                  style={{
-                    color: "rgb(255, 200, 7)",
-                    width: "46px",
-                    height: "44px",
-                  }}
-                  onClick={() => setNewScore(5)}
-                />
-              </FillStar>
+              <div>{sliverStar}</div>
+              <FillStar width={FillWidth}>{goldStar}</FillStar>
             </EditStarBox>
             <EditContent
               defaultValue={content}

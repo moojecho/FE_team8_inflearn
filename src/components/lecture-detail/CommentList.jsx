@@ -14,23 +14,33 @@ const CommentList = ({
   onDeleteHandler,
   lectureId,
 }) => {
-  const five = Array.from(comments).filter(
-    (comment) => comment.star === 5
-  ).length;
-  const four = Array.from(comments).filter(
-    (comment) => comment.star === 4
-  ).length;
-  const three = Array.from(comments).filter(
-    (comment) => comment.star === 3
-  ).length;
-  const two = Array.from(comments).filter(
-    (comment) => comment.star === 2
-  ).length;
-  const one = Array.from(comments).filter(
-    (comment) => comment.star === 1
-  ).length;
+  const starScore = (num) => {
+    return Array.from(comments).filter((comment) => comment.star === num)
+      .length;
+  };
 
-  const max = Math.max(five, four, three, two, one);
+  const max = Math.max(
+    starScore(1),
+    starScore(2),
+    starScore(3),
+    starScore(4),
+    starScore(5)
+  );
+
+  const graphBar = [5, 4, 3, 2, 1].map((ele) => (
+    <DashBoardGraphBox key={ele}>
+      <DashBoardGraphScore>{ele}점</DashBoardGraphScore>
+      <DashBoardGraphBar>
+        <GraphBarBackground />
+        <GraphBarValue
+          width={`${360 * (starScore(ele) / commentCount)}px`}
+          backgroundColor={
+            starScore(ele) === max ? "rgb(255, 200, 7)" : "#8c9797"
+          }
+        />
+      </DashBoardGraphBar>
+    </DashBoardGraphBox>
+  ));
 
   return (
     <CommentBox>
@@ -41,66 +51,10 @@ const CommentList = ({
       <DashBoard>
         <DashBoardStar>
           <DashBoardStarNum>{entireScore}</DashBoardStarNum>
-          <Star
-            width={"20px"}
-            height={"20px"}
-            boxWidth={100}
-            score={entireScore}
-          />
+          <Star width="20px" height="20px" boxWidth={100} score={entireScore} />
           <DashBoardStarText>{commentCount}개의 수강평</DashBoardStarText>
         </DashBoardStar>
-        <DashBoardGraph>
-          <DashBoardGraphBox>
-            <DashBoardGraphScore>5점</DashBoardGraphScore>
-            <DashBoardGraphBar>
-              <GraphBarBackground />
-              <GraphBarValue
-                width={`${360 * (five / commentCount)}px`}
-                backgrounColor={five === max ? "rgb(255, 200, 7)" : "#8c9797"}
-              />
-            </DashBoardGraphBar>
-          </DashBoardGraphBox>
-          <DashBoardGraphBox>
-            <DashBoardGraphScore>4점</DashBoardGraphScore>
-            <DashBoardGraphBar>
-              <GraphBarBackground />
-              <GraphBarValue
-                width={`${360 * (four / commentCount)}px`}
-                backgrounColor={four === max ? "rgb(255, 200, 7)" : "#8c9797"}
-              />
-            </DashBoardGraphBar>
-          </DashBoardGraphBox>
-          <DashBoardGraphBox>
-            <DashBoardGraphScore>3점</DashBoardGraphScore>
-            <DashBoardGraphBar>
-              <GraphBarBackground />
-              <GraphBarValue
-                width={`${360 * (three / commentCount)}px`}
-                backgrounColor={three === max ? "rgb(255, 200, 7)" : "#8c9797"}
-              />
-            </DashBoardGraphBar>
-          </DashBoardGraphBox>
-          <DashBoardGraphBox>
-            <DashBoardGraphScore>2점</DashBoardGraphScore>
-            <DashBoardGraphBar>
-              <GraphBarBackground />
-              <GraphBarValue
-                width={`${360 * (two / commentCount)}px`}
-                backgrounColor={two === max ? "rgb(255, 200, 7)" : "#8c9797"}
-              />
-            </DashBoardGraphBar>
-          </DashBoardGraphBox>
-          <DashBoardGraphBox>
-            <DashBoardGraphScore>1점</DashBoardGraphScore>
-            <DashBoardGraphBar>
-              <GraphBarBackground />
-              <GraphBarValue
-                width={`${360 * (one / commentCount)}px`}
-                backgrounColor={one === max ? "rgb(255, 200, 7)" : "#8c9797"}
-              />
-            </DashBoardGraphBar>
-          </DashBoardGraphBox>
-        </DashBoardGraph>
+        <DashBoardGraph>{graphBar}</DashBoardGraph>
       </DashBoard>
       <ReviewList>
         {nickname ? (
