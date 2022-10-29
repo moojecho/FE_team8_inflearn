@@ -151,7 +151,6 @@ const Wall = styled.div`
     width: 1px;
     height: 36px;
     background-color: #dee2e6;
-}
 `;
 
 const BannerLay1 = styled.div`
