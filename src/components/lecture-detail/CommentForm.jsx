@@ -38,6 +38,27 @@ const CommentForm = ({ onSubmitHandler, lectureId }) => {
     setComment("");
   };
 
+  const silverStar = [1, 2, 3, 4, 5].map((ele) => {
+    <AiFillStar
+      style={{
+        color: "rgb(222, 226, 230)",
+        width: "30px",
+        height: "30px",
+      }}
+      onClick={() => setScore(ele)}
+    />;
+  });
+
+  const goldStar = [1, 2, 3, 4, 5].map((ele) => {
+    <AiFillStar
+      style={{
+        color: "rgb(255, 200, 7)",
+        width: "30px",
+        height: "30px",
+      }}
+      onClick={() => setScore(ele)}
+    />;
+  });
   return (
     <>
       {modal ? (
@@ -63,90 +84,8 @@ const CommentForm = ({ onSubmitHandler, lectureId }) => {
       <Form onSubmit={handleSubmit}>
         <StarBox>
           <Star>
-            <div>
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(1)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(2)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(3)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(4)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(222, 226, 230)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(5)}
-              />
-            </div>
-            <FillStar width={FillWidth}>
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(1)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(2)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(3)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(4)}
-              />
-              <AiFillStar
-                style={{
-                  color: "rgb(255, 200, 7)",
-                  width: "30px",
-                  height: "30px",
-                }}
-                onClick={() => setScore(5)}
-              />
-            </FillStar>
+            <div>{silverStar}</div>
+            <FillStar width={FillWidth}>{goldStar}</FillStar>
           </Star>
           <StarComment>별점을 선택해주세요</StarComment>
         </StarBox>

@@ -25,15 +25,15 @@ const Lecture = ({
       <LectureHeader>
         <LectureContainer>
           <ThumbnailContainer>
-            <Thunbnail src={lectureImg} alt="thumbnail" />
+            <Thumbnail src={lectureImg} alt="thumbnail" />
           </ThumbnailContainer>
-          <LectureDiscription>
+          <LectureDescription>
             <Title>{title}</Title>
             <Info>
               <InfoStarBox>
                 <Star
-                  width={"14px"}
-                  height={"14px"}
+                  width="14px"
+                  height="14px"
                   boxWidth={70}
                   score={entireScore}
                 />
@@ -73,7 +73,7 @@ const Lecture = ({
                     </Keyword>
                   ))}
             </HashTagBox>
-          </LectureDiscription>
+          </LectureDescription>
         </LectureContainer>
       </LectureHeader>
     </Section>
@@ -106,14 +106,14 @@ const ThumbnailContainer = styled.div`
   position: relative;
 `;
 
-const Thunbnail = styled.img`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
 `;
 
-const LectureDiscription = styled.div`
+const LectureDescription = styled.div`
   padding: 0 42px 0 24px;
   flex-basis: 58.33333333%;
   max-width: 58.33333333%;
