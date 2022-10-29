@@ -6,7 +6,7 @@ const LectureItem = ({ list }) => {
   const navigate = useNavigate();
 
   const [hovering, setHovering] = useState("");
-  console.log(list.id)
+  
   return hovering === "" ? (
     <LectureCard
       onMouseOver={() => setHovering("0.3")}
