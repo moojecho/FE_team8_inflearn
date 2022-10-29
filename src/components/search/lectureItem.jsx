@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import __searchList from "../../redux/modules/lectureSlice";
-
 const LectureItem = ({ list }) => {
   const navigate = useNavigate();
 
   const [hovering, setHovering] = useState("");
   console.log(list.id)
-  return hovering == "" ? (
+  return hovering === "" ? (
     <LectureCard
       onMouseOver={() => setHovering("0.3")}
       onMouseOut={() => setHovering("")}
@@ -39,7 +37,7 @@ const LectureItem = ({ list }) => {
           flexDirection: "row",
         }}
       >
-        {list.originPrice == "무료" ? (
+        {list.originPrice === "무료" ? (
           list.originPrice
         ) : (
           <OriginPrice>{list.originPrice}</OriginPrice>

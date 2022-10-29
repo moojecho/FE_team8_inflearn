@@ -12,17 +12,17 @@ const LectureBottom = () => {
   const navigate = useNavigate();
   const [lectureData, setLectureData] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      await instance
-        .get(`/api/lecture`)
-        .then((res) =>
-          setLectureData(
-            res.data.filter((list) => list.backLevel == "중급이상").slice(0, 3)
-          )
-        );
-    };
+  const getData = async () => {
+    await instance
+      .get(`/api/lecture`)
+      .then((res) =>
+        setLectureData(
+          res.data.filter((list) => list.backLevel === "중급이상").slice(0, 3)
+        )
+      );
+  };
 
+  useEffect(() => {
     getData();
   }, []);
 

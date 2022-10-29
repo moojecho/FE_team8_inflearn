@@ -1,8 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-
-import __searchList from "../../redux/modules/lectureSlice";
 
 import LectureItem from "./lectureItem"
 
@@ -27,7 +25,7 @@ const SearchList = () => {
         전체
       </p>
       <ResultLayout>
-        {lectures && lectures!=[] ? 
+        {lectures.length ? 
           lectures.map((list) => <LectureItem list={list} />
           )
          : 

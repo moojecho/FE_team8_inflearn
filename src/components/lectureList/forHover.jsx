@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import styled from "styled-components";
 
-import __searchList from "../../redux/modules/lectureSlice";
-
 const ForHover = ({list}) => {
   const navigate = useNavigate();
   const [hovering, setHovering] = useState('')
   
   return (
-    hovering==''?
+    hovering===''?
     <LectureCard onMouseOver={()=> setHovering('0.3')} onMouseOut={()=>setHovering('')} key={list.id}>
       <LectureImg src={list.frontLectureImg} />
       <LectureTitle>{list.frontLectureTitle}</LectureTitle>
@@ -35,7 +33,7 @@ const ForHover = ({list}) => {
           flexDirection: "row",
         }}
       >
-        {list.frontOriginPrice == "무료" ? (
+        {list.frontOriginPrice === "무료" ? (
           list.frontOriginPrice
         ) : (
           <OriginPrice>{list.frontOriginPrice}</OriginPrice>

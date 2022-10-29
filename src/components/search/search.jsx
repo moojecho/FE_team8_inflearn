@@ -1,13 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import instance from "../../shared/api";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 
 import Skil from "./skilReco";
-import SearchList from "./searchList";
-import {__searchList,__getLectureList} from "../../redux/modules/lectureSlice";
+import {__searchList} from "../../redux/modules/lectureSlice";
 
 const Search = () => {
   const inputRef = useRef(null);
@@ -20,7 +18,7 @@ const Search = () => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       getData(inputRef);
     }
   };

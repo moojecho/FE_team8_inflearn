@@ -12,17 +12,17 @@ import styled from "styled-components";
 const LectureMiddle = () => {
   const [lectureData, setLectureData] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      await instance
-        .get(`api/lecture`)
-        .then((res) =>
-          setLectureData(
-            res.data.filter((list) => list.backLevel == "초급").slice(0, 15)
-          )
-        );
-    };
+  const getData = async () => {
+    await instance
+      .get(`api/lecture`)
+      .then((res) =>
+        setLectureData(
+          res.data.filter((list) => list.backLevel === "초급").slice(0, 15)
+        )
+      );
+  };
 
+  useEffect(() => {
     getData();
   }, []);
 

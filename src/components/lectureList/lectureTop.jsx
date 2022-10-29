@@ -7,22 +7,20 @@ import "slick-carousel/slick/slick-theme.css";
 
 import ForHover from "./forHover";
 
-import { __getLectureList } from "../../redux/modules/lectureSlice";
-
 import styled from "styled-components";
 
 const Tab = () => {
   const [lectureData, setLectureData] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      await instance
-        .get(`/api/lecture`)
-        .then((res) =>
-          setLectureData(res.data.filter((list) => list.backLevel == "입문"))
-        );
-    };
+  const getData = async () => {
+    await instance
+      .get(`/api/lecture`)
+      .then((res) =>
+        setLectureData(res.data.filter((list) => list.backLevel === "입문"))
+      );
+  };
 
+  useEffect(() => {
     getData();
   }, []);
 

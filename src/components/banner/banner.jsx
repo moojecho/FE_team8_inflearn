@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import instance from "../../shared/api";
+import React, { useState } from "react";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -14,18 +13,7 @@ import {
 import styled from "styled-components";
 
 const Tab = () => {
-  const [eventData, setEventData] = useState([]);
   const [pause, setPause] = useState(true);
-
-  useEffect(() => {
-    const getData = async () => {
-      await instance
-        .get(`/api/banner`)
-        .then((res) => setEventData(res.data.slice(0, 9)));
-    };
-
-    getData();
-  }, []);
 
   const settings = {
     dots: true,
@@ -99,7 +87,7 @@ const Tab = () => {
           <MoveButton>
             <p>{`3 / 3`}</p>
             <LeftOutlined  style={{ marginLeft: "25px",cursor: "pointer" }} />
-            {pause == true ? (
+            {pause? (
               <PauseOutlined
                 style={{ cursor: "pointer" }}
                 onClick={() => setPause(!pause)}
